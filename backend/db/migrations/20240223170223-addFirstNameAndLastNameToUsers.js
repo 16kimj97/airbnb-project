@@ -1,20 +1,27 @@
+'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('Users', 'firstName', {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: '', // Provide a default value
+      ...options  // Pass options containing schema information
     });
 
     await queryInterface.addColumn('Users', 'lastName', {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: '', // Provide a default value
+      ...options  // Pass options containing schema information
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('Users', 'firstName');
-    await queryInterface.removeColumn('Users', 'lastName');
+    await queryInterface.removeColumn('Users', 'firstName', options);
+    await queryInterface.removeColumn('Users', 'lastName', options);
   }
 };
