@@ -18,8 +18,15 @@ module.exports = {
     }, options);
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('Users', 'firstName', options);
-    await queryInterface.removeColumn('Users', 'lastName', options);
-  }
+  async down(queryInterface, Sequelize) {
+    options.tableName = "Users";
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(
+      options,
+      {
+        username: { [Op.in]: ["Demo-lition", "FakeUser1", "FakeUser2"] },
+      },
+      {}
+    );
+  },
 };
