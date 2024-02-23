@@ -10,14 +10,12 @@ module.exports = {
     await queryInterface.addColumn('Users', 'firstName', {
       type: Sequelize.STRING,
       allowNull: false,
-      ...options  // Pass options containing schema information
-    });
+    }, options);
 
     await queryInterface.addColumn('Users', 'lastName', {
       type: Sequelize.STRING,
       allowNull: false,
-      ...options  // Pass options containing schema information
-    });
+    }, options);
   },
 
   down: async (queryInterface, Sequelize) => {
