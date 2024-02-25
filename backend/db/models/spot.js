@@ -2,19 +2,35 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Spot extends Model {
-    static associate(models) {
-      // define association here with User model
-      Spot.belongsTo(models.User, { foreignKey: 'ownerId', as: 'owner' });
+    class Spot extends Model {
+        static associate(models) {
+          Spot.belongsTo(models.User, {
+            foreignKey: 'ownerId',
+            onDelete: 'CASCADE'
+          });
+
+          Spot.hasMany(models.Review, {
+            foreignKey: 'spotId',
+            onDelete: 'CASCADE',
+            hooks: true
+          });
+
+          Spot.hasMany(models.Booking, {
+            foreignKey: 'spotId',
+            onDelete: 'CASCADE',
+            hooks: true
+          });
+
+          Spot.hasMany(models.SpotImage, {
+            foreignKey: 'spotId',
+            onDelete: 'CASCADE',
+            hooks: true
+        });
     }
-  }
+}
+
 
   Spot.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
