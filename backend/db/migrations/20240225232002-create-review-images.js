@@ -21,8 +21,6 @@ module.exports = {
           model: 'Reviews',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       url: {
         type: Sequelize.STRING,

@@ -52,6 +52,50 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          ownerId: 1,
+          address: "544 Summoners Rift",
+          city: "Legends",
+          state: "Of",
+          country: "Legends",
+          lat: 54.11565,
+          lng: -106.8856,
+          name: "Seaside Retreat",
+          description: "A magical house in the forest.",
+          price: 520.00,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          ownerId: 2,
+          address: "242 Tactics Lane",
+          city: "Little",
+          state: "Auto",
+          country: "Chess",
+          lat: 34.0522,
+          lng: -118.2437,
+          name: "Seaside Retreat",
+          description: "Charming apartment near airport",
+          price: 60.00,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          ownerId: 3,
+          address: "895 Dust Road",
+          city: "Counter",
+          state: "Strike",
+          country: "Go",
+          lat: 34.0522,
+          lng: -118.2437,
+          name: "Seaside Retreat",
+          description: "A desert retreat mansion.",
+          price: 620.99,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+
+
       ],
       { validate: true }
     );
@@ -64,7 +108,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       'Spots',
       {
-        address: { [Op.in]: ["123 Main St", "456 Elm St", "789 Oak St", "101 Pine St", "202 Maple St"] },
+        address: { [Op.in]: ["123 Main St", "456 Elm St", "789 Oak St"] },
       },
       {}
     );
