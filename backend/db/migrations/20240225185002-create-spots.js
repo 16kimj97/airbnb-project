@@ -76,27 +76,9 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     }, options);
-
-    // Alter Users table to add ownerId column
-    await queryInterface.addColumn(
-      'Users',
-      'ownerId',
-      {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-      }
-    );
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('Users', 'ownerId');
-
     await queryInterface.dropTable('Spots');
   }
 };
