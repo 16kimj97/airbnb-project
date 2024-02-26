@@ -4,7 +4,11 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class SpotImage extends Model {
         static associate(models) {
+<<<<<<< HEAD
           SpotImage.belongsTo(models.Spot, {
+=======
+          SpotImage.belongsTo(models.Spots, {
+>>>>>>> main
             foreignKey: 'spotId',
             onDelete: 'CASCADE'
         });

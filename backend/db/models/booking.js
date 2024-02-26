@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'CASCADE'
           });
 
+<<<<<<< HEAD
           Booking.belongsTo(models.Spot, {
+=======
+          Booking.belongsTo(models.Spots, {
+>>>>>>> main
             foreignKey: 'spotId',
             onDelete: 'CASCADE'
         });

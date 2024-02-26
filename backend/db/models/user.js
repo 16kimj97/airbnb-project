@@ -4,7 +4,11 @@ const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
+<<<<<<< HEAD
       User.hasMany(models.Spot, {
+=======
+      User.hasMany(models.Spots, {
+>>>>>>> main
         foreignKey: 'ownerId',
         onDelete: 'CASCADE',
       });
