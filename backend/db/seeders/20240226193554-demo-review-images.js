@@ -28,18 +28,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        reviewId: 4,
-        url: "https://example.com/image4.jpg",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        reviewId: 5,
-        url: "https://example.com/image5.jpg",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
     ], { validate: true });
   },
 
@@ -54,8 +42,6 @@ module.exports = {
             "https://example.com/image1.jpg",
             "https://example.com/image2.jpg",
             "https://example.com/image3.jpg",
-            "https://example.com/image4.jpg",
-            "https://example.com/image5.jpg"
           ]
         }
       },

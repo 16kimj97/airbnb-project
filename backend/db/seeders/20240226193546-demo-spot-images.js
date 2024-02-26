@@ -31,20 +31,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        spotId: 4,
-        url: "https://example.com/image4.jpg",
-        preview: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        spotId: 5,
-        url: "https://example.com/image5.jpg",
-        preview: true,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
     ], { validate: true });
   },
 
@@ -59,8 +45,6 @@ module.exports = {
             "https://example.com/image1.jpg",
             "https://example.com/image2.jpg",
             "https://example.com/image3.jpg",
-            "https://example.com/image4.jpg",
-            "https://example.com/image5.jpg"
           ]
         }
       },

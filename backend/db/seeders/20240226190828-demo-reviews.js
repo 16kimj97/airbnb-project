@@ -12,7 +12,7 @@ module.exports = {
     await Review.bulkCreate(
       [
         {
-          spotId: 1,
+          spotId: 3,
           userId: 1,
           review: "Great spot! Really enjoyed my stay.",
           stars: 5,
@@ -21,36 +21,20 @@ module.exports = {
         },
         {
           spotId: 2,
-          userId: 2,
+          userId: 3,
           review: "Average place, could use some improvements.",
           stars: 3,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          spotId: 3,
-          userId: 3,
+          spotId: 1,
+          userId: 2,
           review: "Lovely location, highly recommended!",
           stars: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
-        {
-          spotId: 4,
-          userId: 4,
-          review: "Not satisfied with the cleanliness.",
-          stars: 2,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          spotId: 5,
-          userId: 5,
-          review: "Fantastic experience, will definitely come back!",
-          stars: 5,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
       ],
       { validate: true }
     );
@@ -62,7 +46,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        review: { [Op.in]: ["Great spot! Really enjoyed my stay.","Average place, could use some improvements.", "Lovely location, highly recommended!","Not satisfied with the cleanliness.","Fantastic experience, will definitely come back!"] },
+        review: { [Op.in]: ["Great spot! Really enjoyed my stay.","Average place, could use some improvements.", "Lovely location, highly recommended!"] },
       },
       {}
     );

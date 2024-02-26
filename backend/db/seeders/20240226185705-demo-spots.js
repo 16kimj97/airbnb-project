@@ -52,34 +52,6 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
-        {
-          ownerId: 4,
-          address: "101 Pine St",
-          city: "NoTown",
-          state: "NYC",
-          country: "Timberland",
-          lat: 41.8781,
-          lng: -87.6298,
-          name: "Rustic Cabin",
-          description: "A rustic cabin nestled in the woods.",
-          price: 80.00,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          ownerId: 5,
-          address: "202 Maple St",
-          city: "Gotham",
-          state: "Batland",
-          country: "Brotherland",
-          lat: 51.5074,
-          lng: -0.1278,
-          name: "Urban Oasis",
-          description: "An oasis in the middle of the city.",
-          price: 120.00,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
       ],
       { validate: true }
     );
