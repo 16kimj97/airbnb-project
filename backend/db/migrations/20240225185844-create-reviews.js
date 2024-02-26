@@ -21,6 +21,7 @@ module.exports = {
         references: {
           model: 'Spots',
           key: 'id',
+          onDelete: 'CASCADE' // Add onDelete: 'CASCADE' here
         },
       },
       userId: {
@@ -29,6 +30,7 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
+          onDelete: 'CASCADE' // Add onDelete: 'CASCADE' here
         },
       },
       review: {
@@ -51,8 +53,7 @@ module.exports = {
       }
     }, options);
   },
-
-  async down(queryInterface, Sequelize) {
+    async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Reviews');
   }
 };
