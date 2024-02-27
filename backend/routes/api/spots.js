@@ -32,7 +32,6 @@ router.get('/', async (req, res) => {
 
     let spotsData = spots.map(spot => spot.toJSON());
 
-    //get all reviews from same spotID and get count
     for (let spot of spotsData) {
       const reviewsCount = await Review.count({
         where: { spotId: spot.id }
@@ -262,6 +261,7 @@ router.delete  ('/:spotId', requireAuth, async (req, res) => {
     res.status(200).json( {message: "Successfully deleted"} )
 });
 
+//Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     const spotId = req.params.spotId;
     const userId = req.user.id;
@@ -301,6 +301,33 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     res.json(newReview)
 });
 
+// Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res) => {
+    const spotId = req.params.spotId;
+
+    const spot = await Spots.findByPk(spotId);
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found" });
+    }
+
+    const reviews = await Review.findAll({
+        where: { spotId },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    });
+
+    const formattedReviews = reviews.map(review => review.toJSON());
+
+    res.json({ Reviews: formattedReviews });
+});
 
 
 module.exports = router;

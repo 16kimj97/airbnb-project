@@ -24,67 +24,55 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const imageUrl = req.body.url;
 
     const image = await ReviewImage.create({ url: imageUrl, reviewId });
-    return res.status(200).json({ id: image.id, url: image.url });
+    res.json({ id: image.id, url: image.url });
 });
 
-//Get all Reviews of the Current user
+// Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res) => {
-    const userId = req.user.id;
+        const userId = req.user.id;
 
-    const reviews = await Review.findAll({
-        where: {userId: userId},
-        include: [
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            },
-            {
-                model: Spots,
-                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-                include: [
-                    {
-                        model: SpotImage,
-                        where: { preview: true },
-                        required: false,
-                        attributes: ['url']
-                    }
-                ]
-            },
-        {
-                model: ReviewImage,
-                attributes: ['id', 'url']
+        const reviews = await Review.findAll({
+            where: { userId },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: Spots,
+                    attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+                    include: [
+                        {
+                            model: SpotImage,
+                            where: { preview: true },
+                            required: false,
+                            attributes: ['url']
+                        }
+                    ]
+                },
+                {
+                    model: ReviewImage,
+                    attributes: ['id', 'url']
+                }
+            ]
+        });
+        const returnedReviews = reviews.map(review => {
+            const formattedReview = review.toJSON();
+
+            if (formattedReview.Spot.SpotImages.length > 0) {
+                formattedReview.Spot.previewImage = formattedReview.Spot.SpotImages[0].url;
+            } else {
+                formattedReview.Spot.previewImage = null;
             }
-        ]
-    })
+            delete formattedReview.Spot.SpotImages;
+            return formattedReview;
+        });
 
-    const returnedReviews = reviews.map(review => ({
-        id: review.id,
-        userId: review.userId,
-        spotId: review.spotId,
-        review: review.review,
-        stars: review.stars,
-        createdAt: review.createdAt,
-        updatedAt: review.updatedAt,
-        User: review.User,
-        Spot: {
-            id: review.Spot.id,
-            ownerId: review.Spot.ownerId,
-            address: review.Spot.address,
-            city: review.Spot.city,
-            state: review.Spot.state,
-            country: review.Spot.country,
-            lat: review.Spot.lat,
-            lng: review.Spot.lng,
-            name: review.Spot.name,
-            price: review.Spot.price,
-            previewImage: review.Spot.SpotImages[0].url
-          },
-
-        ReviewImages: review.ReviewImages
-    }));
-
-    return res.json( {Reviews: returnedReviews})
+        res.json({ Reviews: returnedReviews });
 });
+
+
+
 
 
 module.exports = router;
