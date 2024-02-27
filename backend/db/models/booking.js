@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
 
           Booking.belongsTo(models.User, {
             foreignKey: 'userId',
-            onDelete: 'CASCADE'
           });
 
 <<<<<<< HEAD
@@ -16,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
           Booking.belongsTo(models.Spots, {
 >>>>>>> main
             foreignKey: 'spotId',
-            onDelete: 'CASCADE'
         });
     }
 }
