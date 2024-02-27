@@ -260,7 +260,7 @@ router.delete  ('/:spotId', requireAuth, async (req, res) => {
     res.status(200).json( {message: "Successfully deleted"} )
 });
 
-router.post('/spotId/reviews', requireAuth, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     const spotId = req.params.spotId;
     const userId = req.user.id;
 
@@ -290,7 +290,7 @@ router.post('/spotId/reviews', requireAuth, async (req, res) => {
     };
 
     const newReview = await Review.create({
-        userIdL: userId,
+        userId: userId,
         spotId: spotId,
         review: review,
         stars: stars
