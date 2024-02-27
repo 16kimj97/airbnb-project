@@ -53,8 +53,9 @@ router.get('/', async (req, res) => {
       } else {
         spot.previewImage = null;
       }
-    }
 
+      delete spot.SpotImages
+    }
     res.json({ Spots: spotsData });
 });
 
@@ -137,6 +138,7 @@ router.get('/current', requireAuth, async (req, res) => {
             } else {
                 spot.previewImage = null;
             }
+            delete spot.SpotImages
         }
 
         res.json({ Spots: spotsData });
