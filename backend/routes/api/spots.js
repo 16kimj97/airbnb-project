@@ -142,17 +142,57 @@ router.get('/current', requireAuth, async (req, res) => {
         res.json({ Spots: spotsData });
 });
 
-router.get('/:spotId', async (req,res)=> {
-    const { spotId } = req.params;
+router.get('/:spotId', async (req, res) => {
+      const spotId = req.params.spotId;
 
-    const spot = await Spots.findByPk(spotId, {
+      const spot = await Spots.findByPk(spotId, {
         include: [
-          { model: SpotImage, where: { preview: true } },
-          { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] }
+          { model: SpotImage },
+          { model: Review }
         ]
       });
-});
 
+      if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found" });
+      }
+
+      let ownerId, firstName, lastName;
+      if (spot.Owner) {
+        ownerId = spot.Owner.id;
+        firstName = spot.Owner.firstName;
+        lastName = spot.Owner.lastName;
+      }
+
+      const reviewsCount = spot.Reviews.length;
+      const totalStars = spot.Reviews.reduce((sum, review) => sum + review.stars, 0);
+      const avgStarRating = reviewsCount > 0 ? (totalStars / reviewsCount).toFixed(1) : "No ratings yet";
+
+      const spotDetails = {
+        id: spot.id,
+        ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+        price: spot.price,
+        createdAt: spot.createdAt,
+        updatedAt: spot.updatedAt,
+        numReviews: reviewsCount,
+        avgStarRating,
+        SpotImages: spot.SpotImages.map(image => ({ id: image.id, url: image.url, preview: image.preview })),
+        Owner: {
+          id: ownerId,
+          firstName,
+          lastName
+        }
+      };
+      // Send successful response with spot details
+      res.status(200).json(spotDetails);
+  });
 
 
 module.exports = router;
