@@ -60,6 +60,7 @@ const setTokenCookie = (res, user) => {
     });
   };
 
+  //If there is no current user return an error
   const requireAuth = function (req, _res, next) {
     if (req.user) return next();
 
