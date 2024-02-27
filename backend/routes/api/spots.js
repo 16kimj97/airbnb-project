@@ -142,32 +142,41 @@ router.get('/current', requireAuth, async (req, res) => {
         res.json({ Spots: spotsData });
 });
 
+//Get details for a Spot from an id
 router.get('/:spotId', async (req, res) => {
-      const spotId = req.params.spotId;
+    const spotId = req.params.spotId;
 
-      const spot = await Spots.findByPk(spotId, {
+    const spot = await Spots.findByPk(spotId, {
         include: [
-          { model: SpotImage },
-          { model: Review }
+            { model: SpotImage },
+            { model: Review },
+            { model: User }
         ]
-      });
+    });
 
-      if (!spot) {
+    if (!spot) {
         return res.status(404).json({ message: "Spot couldn't be found" });
-      }
+    }
 
-      let ownerId, firstName, lastName;
-      if (spot.Owner) {
-        ownerId = spot.Owner.id;
-        firstName = spot.Owner.firstName;
-        lastName = spot.Owner.lastName;
-      }
+    let ownerId, firstName, lastName;
 
-      const reviewsCount = spot.Reviews.length;
-      const totalStars = spot.Reviews.reduce((sum, review) => sum + review.stars, 0);
-      const avgStarRating = reviewsCount > 0 ? (totalStars / reviewsCount).toFixed(1) : "No ratings yet";
+    if (spot.User) {
+        ownerId = spot.User.id;
+        firstName = spot.User.firstName;
+        lastName = spot.User.lastName;
+    }
 
-      const spotDetails = {
+    const numReviews = spot.Reviews.length;
+    let avgStarRating;
+
+    if (numReviews > 0) {
+        const totalStars = spot.Reviews.reduce((acc, review) => acc + review.stars, 0);
+        avgStarRating = (totalStars / numReviews).toFixed(1);
+    } else {
+        avgStarRating = "No ratings yet";
+    }
+
+    const spotDetails = {
         id: spot.id,
         ownerId,
         address: spot.address,
@@ -181,18 +190,20 @@ router.get('/:spotId', async (req, res) => {
         price: spot.price,
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
-        numReviews: reviewsCount,
+        numReviews,
         avgStarRating,
         SpotImages: spot.SpotImages.map(image => ({ id: image.id, url: image.url, preview: image.preview })),
         Owner: {
-          id: ownerId,
-          firstName,
-          lastName
+            id: ownerId,
+            firstName,
+            lastName
         }
-      };
-      // Send successful response with spot details
-      res.status(200).json(spotDetails);
-  });
+    };
+
+    res.json(spotDetails);
+});
+
+module.exports = router;
 
 
 module.exports = router;
