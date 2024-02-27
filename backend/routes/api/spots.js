@@ -195,7 +195,7 @@ router.get('/:spotId', async (req, res) => {
         price: spot.price,
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
-        numReviews,
+        reviewsCount,
         avgStarRating,
         SpotImages: spot.SpotImages.map(image => ({ id: image.id, url: image.url, preview: image.preview })),
         Owner: {
@@ -258,6 +258,45 @@ router.delete  ('/:spotId', requireAuth, async (req, res) => {
 
     await spot.destroy()
     res.status(200).json( {message: "Successfully deleted"} )
+});
+
+router.post('/spotId/reviews', requireAuth, async (req, res) => {
+    const spotId = req.params.spotId;
+    const userId = req.user.id;
+
+    const spot = await Spots.findByPk(spotId);
+
+    if(!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found" })
+    }
+
+    const existingReview = await Review.findOne({
+        where: {
+            spotId: spotId,
+            userId: userId
+        }
+    });
+
+    if (existingReview){
+        return res.status(403).json({ message: "User already has a review for this spot" })
+    }
+
+    const {review, stars} = req.body;
+    if (!review) {
+        return res.status(400).json( {message: "Review text is required"} );
+    };
+    if (!Number.isInteger(stars) || stars < 1 || stars > 5) {
+        return res.status(400).json( { message: "Stars must be a integer from 1 to 5 "})
+    };
+
+    const newReview = await Review.create({
+        userIdL: userId,
+        spotId: spotId,
+        review: review,
+        stars: stars
+    });
+
+    res.json(newReview)
 });
 
 
