@@ -166,12 +166,17 @@ router.get('/:spotId', async (req, res) => {
         lastName = spot.User.lastName;
     }
 
-    const numReviews = spot.Reviews.length;
+    const reviewsCount = await Review.count({
+        where: { spotId: spot.id }
+    });
+
     let avgStarRating;
 
-    if (numReviews > 0) {
-        const totalStars = spot.Reviews.reduce((acc, review) => acc + review.stars, 0);
-        avgStarRating = (totalStars / numReviews).toFixed(1);
+    if (reviewsCount > 0) {
+        const totalStars = await Review.sum('stars', {
+            where: { spotId: spot.id }
+        });
+        avgStarRating = (totalStars / reviewsCount).toFixed(1);
     } else {
         avgStarRating = "No ratings yet";
     }
