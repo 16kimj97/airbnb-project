@@ -19,6 +19,27 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+const validateBookingDates = [
+    check('startDate')
+        .custom((value, { req }) => {
+            const startDate = new Date(value);
+            const today = new Date();
+            if (startDate < today) {
+                throw new Error('startDate cannot be in the past');
+            }
+        }),
+
+    check('endDate')
+        .custom((value, { req }) => {
+            const startDate = new Date(req.body.startDate);
+            const endDate = new Date(value);
+            if (endDate <= startDate) {
+                throw new Error('endDate cannot be on or before startDate');
+            }
+         }),
+];
+
+
 
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
@@ -327,6 +348,55 @@ router.get('/:spotId/reviews', async (req, res) => {
     const formattedReviews = reviews.map(review => review.toJSON());
 
     res.json({ Reviews: formattedReviews });
+});
+
+//Create a Booking from a Spot based on the Spot's id
+router.post('/:spotId/bookings', requireAuth, validateBookingDates, async (req, res) => {
+    const spotId = req.params.spotId
+    const { startDate, endDate } = req.body;
+    const userId = req.user.id
+    const spot = await Spots.findByPk(spotId);
+
+    if (!spot){
+        return res.status(404).json( { message: "Spot couldn't be found" })
+    }
+
+    if (spot.ownerId === userId){
+        return res.status(403).json({ message: "Users cannot book their own spots" });
+    }
+
+    const bookings = await Booking.findAll({
+        where: {
+            spotId: spotId,
+        },
+    });
+
+    const newStartDate = new Date(startDate);
+    const newEndDate = new Date(endDate);
+
+    for (let booking of bookings) {
+        let oldStartDate = new Date(booking.startDate);
+        let oldEndDate = new Date(booking.endDate);
+
+        if (newStartDate <= oldEndDate && newEndDate >= oldStartDate) {
+            return res.status(403).json({
+                message: "Sorry, this spot is already booked for the specified dates",
+                errors: {
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflicts with an existing booking"
+                }
+            });
+        }
+    }
+
+    const createdBooking = await Booking.create({
+        userId,
+        spotId,
+        startDate: newStartDate,
+        endDate: newEndDate
+    });
+
+    res.json(createdBooking)
 });
 
 
