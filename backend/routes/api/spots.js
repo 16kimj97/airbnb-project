@@ -19,28 +19,6 @@ const validateSpot = [
     handleValidationErrors
 ];
 
-const validateBookingDates = [
-    check('startDate')
-        .custom((value, { req }) => {
-            const startDate = new Date(value);
-            const today = new Date();
-            if (startDate < today) {
-                throw new Error('startDate cannot be in the past');
-            }
-        }),
-
-    check('endDate')
-        .custom((value, { req }) => {
-            const startDate = new Date(req.body.startDate);
-            const endDate = new Date(value);
-            if (endDate <= startDate) {
-                throw new Error('endDate cannot be on or before startDate');
-            }
-         }),
-];
-
-
-
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
     const spots = await Spots.findAll({
@@ -356,7 +334,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body;
     const userId = req.user.id;
 
-    // Validation
     const startDateValidation = new Date(startDate);
     const today = new Date();
     if (startDateValidation < today) {
@@ -364,8 +341,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     }
 
     const endDateValidation = new Date(endDate);
-    const startDateValidationCheck = new Date(req.body.startDate);
-    if (endDateValidation <= startDateValidationCheck) {
+    if (endDateValidation <= startDateValidation) {
         return res.status(400).json({ message: 'endDate cannot be on or before startDate' });
     }
 
@@ -409,6 +385,37 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     res.json(createdBooking);
 });
+
+//Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spotId = req.params.spotId;
+    const userId = req.user.id;
+
+        const spot = await Spots.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+
+        if (spot.ownerId === userId) {
+            const bookings = await Booking.findAll({
+                where: { spotId },
+                include: {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            });
+
+            return res.status(200).json({ Bookings: bookings });
+        } else {
+            const bookings = await Booking.findAll({
+                where: { spotId },
+                attributes: ['spotId', 'startDate', 'endDate']
+            });
+
+            return res.status(200).json({ Bookings: bookings });
+        }
+});
+
 
 
 module.exports = router;
