@@ -19,45 +19,68 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+
+
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    // Set default values for page and size if not provided or invalid
+    if (!page || isNaN(parseInt(page))) {
+        page = 1;
+    }
+    if (!size || isNaN(parseInt(size))) {
+        size = 20;
+    }
+
+    const offset = (page - 1) * size;
+    const limit = parseInt(size);
+
+    const whereConditions = {};
+
+    if (minLat && maxLat) {
+        whereConditions.lat = { [Op.between]: [parseFloat(minLat), parseFloat(maxLat)] };
+    }
+    if (minLng && maxLng) {
+        whereConditions.lng = { [Op.between]: [parseFloat(minLng), parseFloat(maxLng)] };
+    }
+    if (minPrice !== undefined && maxPrice !== undefined) {
+        whereConditions.price = { [Op.between]: [parseFloat(minPrice), parseFloat(maxPrice)] };
+    }
+
     const spots = await Spots.findAll({
-      include: {
-        model: SpotImage,
-        where: { preview: true },
-        required: false
-      }
+        where: whereConditions,
+        include: {
+            model: SpotImage,
+            where: { preview: true },
+            required: false
+        },
+        limit: limit,
+        offset: offset
     });
 
-    let spotsData = spots.map(spot => spot.toJSON());
-
-    for (let spot of spotsData) {
-      const reviewsCount = await Review.count({
-        where: { spotId: spot.id }
-      });
-
-      if (reviewsCount > 0) {
-        const totalStars = await Review.sum('stars', {
-          where: { spotId: spot.id }
+    for (let spot of spots) {
+        const reviewsCount = await Review.count({
+            where: { spotId: spot.id }
         });
-        spot.avgRating = (totalStars / reviewsCount).toFixed(1);
-      } else {
-        spot.avgRating = "No ratings yet";
-      }
 
-      //if have img add img url to spot
-      if (spot.PreviewImage) {
-        spot.previewImage = spot.PreviewImage.url;
-      } else {
-        spot.previewImage = null;
-      }
-
-      delete spot.SpotImages
+        if (reviewsCount > 0) {
+            const totalStars = await Review.sum('stars', {
+                where: { spotId: spot.id }
+            });
+            spot.avgRating = (totalStars / reviewsCount).toFixed(1);
+        } else {
+            spot.avgRating = "No ratings yet";
+        }
     }
-    res.json({ Spots: spotsData });
+
+    res.status(200).json({
+        Spots: spots,
+        page: parseInt(page),
+        size: parseInt(size)
+    });
 });
 
-//CREATE A SPOT
 router.post('/', requireAuth, validateSpot, async(req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()){
@@ -334,6 +357,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body;
     const userId = req.user.id;
 
+    // Validation
     const startDateValidation = new Date(startDate);
     const today = new Date();
     if (startDateValidation < today) {
@@ -341,7 +365,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     }
 
     const endDateValidation = new Date(endDate);
-    if (endDateValidation <= startDateValidation) {
+    const startDateValidationCheck = new Date(req.body.startDate);
+    if (endDateValidation <= startDateValidationCheck) {
         return res.status(400).json({ message: 'endDate cannot be on or before startDate' });
     }
 
@@ -385,36 +410,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     res.json(createdBooking);
 });
-
-//Get all Bookings for a Spot based on the Spot's id
-router.get('/:spotId/bookings', requireAuth, async (req, res) => {
-    const spotId = req.params.spotId;
-    const userId = req.user.id;
-
-        const spot = await Spots.findByPk(spotId);
-        if (!spot) {
-            return res.status(404).json({ message: "Spot couldn't be found" });
-        }
-
-        if (spot.ownerId === userId) {
-            const bookings = await Booking.findAll({
-                where: { spotId },
-                include: {
-                    model: User,
-                    attributes: ['id', 'firstName', 'lastName']
-                }
-            });
-
-            return res.status(200).json({ Bookings: bookings });
-        } else {
-            const bookings = await Booking.findAll({
-                where: { spotId },
-                attributes: ['spotId', 'startDate', 'endDate']
-            });
-            res.json({ Bookings: bookings });
-        }
-});
-
 
 
 module.exports = router;
