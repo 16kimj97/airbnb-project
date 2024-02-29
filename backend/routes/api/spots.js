@@ -58,7 +58,13 @@ router.get('/', async (req, res) => {
         offset: offset
     });
 
-    for (let spot of spots) {
+    const spotsData = spots.map(spot => {
+        const spotJson = spot.toJSON();
+
+        return spotJson;
+    });
+
+    for (let spot of spotsData) {
         const reviewsCount = await Review.count({
             where: { spotId: spot.id }
         });
@@ -71,10 +77,17 @@ router.get('/', async (req, res) => {
         } else {
             spot.avgRating = "No ratings yet";
         }
+
+        if (spot.PreviewImage) {
+            spot.previewImage = spot.PreviewImage.url;
+        } else {
+            spot.previewImage = null;
+        }
+        delete spot.SpotImages;
     }
 
     res.status(200).json({
-        Spots: spots,
+        Spots: spotsData,
         page: parseInt(page),
         size: parseInt(size)
     });
