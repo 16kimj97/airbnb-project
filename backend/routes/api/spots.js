@@ -25,7 +25,6 @@ const validateSpot = [
 router.get('/', async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-    // Set default values for page and size if not provided or invalid
     if (!page || isNaN(parseInt(page))) {
         page = 1;
     }
@@ -357,7 +356,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body;
     const userId = req.user.id;
 
-    // Validation
     const startDateValidation = new Date(startDate);
     const today = new Date();
     if (startDateValidation < today) {
