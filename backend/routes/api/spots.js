@@ -411,5 +411,4 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     res.json(createdBooking);
 });
 
-
 module.exports = router;

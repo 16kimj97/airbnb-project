@@ -6,6 +6,8 @@ const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+
+//Delete a Review Image
 router.delete('/:imageId', requireAuth, async (req, res) => {
     const imageId = req.params.imageId;
     const userId = req.user.id;
@@ -25,10 +27,6 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         await image.destroy();
         res.status(200).json({ message: "Successfully deleted" });
 });
-
-
-
-
 
 
 

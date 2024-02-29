@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
-
+//Create and return a new booking from a spot specified by id.
 router.get('/current', requireAuth, async (req, res) => {
       const userId = req.user.id;
 
@@ -38,7 +38,7 @@ router.get('/current', requireAuth, async (req, res) => {
   });
 
 
-
+//Update and return an existing booking.
   router.put('/:bookingId', requireAuth, async (req, res) => {
     const bookingId = req.params.bookingId;
     const userId = req.user.id;
@@ -98,7 +98,7 @@ router.get('/current', requireAuth, async (req, res) => {
         res.status(200).json(booking);
 });
 
-
+//Delete an existing booking.
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const bookingId = req.params.bookingId;
     const userId = req.user.id;
