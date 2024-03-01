@@ -9,8 +9,12 @@ const router = express.Router();
 //Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewId;
-
+    let userId = req.user.id
     const review = await Review.findByPk(reviewId);
+
+    if(review.userId !== userId){
+        return res.status(403).json({"message": "Forbidden"})
+    }
 
     if (!review){
         return res.status(404).json({ message: "Review couldn't be found" });

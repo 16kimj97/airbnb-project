@@ -19,9 +19,45 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+const validateQueryParameters = [
+    check('page')
+        .optional()
+        .isInt({min:1, max:10})
+        .withMessage("Page must be greater than or equal to 1 and less than 10"),
+    check('size')
+        .optional()
+        .isInt({min:1, max:20})
+        .withMessage("Size must be greater than or equal to 1 and less than 20"),
+    check('minLat')
+        .isFloat({min: -90, max: 90})
+        .optional()
+        .withMessage("Minimum latitude is invalid"),
+    check('maxLat')
+        .isFloat({min: -90, max: 90})
+        .optional()
+        .withMessage("Maximum latitude is invalid"),
+    check('minLng')
+        .isFloat({min:-180, max:180})
+        .optional()
+        .withMessage("Maximum longitude is invalid"),
+    check('maxLng')
+        .isFloat({min:-180, max:180})
+        .optional()
+        .withMessage("Minimum longitude is invalid"),
+    check('minPrice')
+        .isFloat({min:0})
+        .optional()
+        .withMessage("Minimum price must be greater than or equal to 0"),
+    check('maxPrice')
+        .isFloat({min: 0})
+        .optional()
+        .withMessage("Maximum price must be greater than or equal to 0"),
+    handleValidationErrors
+];
+
 
 // GET ALL SPOTS
-router.get('/', async (req, res) => {
+router.get('/', validateQueryParameters, async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     if (!page || isNaN(parseInt(page))) {
@@ -118,9 +154,15 @@ router.post('/', requireAuth, validateSpot, async(req, res) => {
 
 //ADD IMAGE TO SPOT BASED ON SPOT ID
 router.post('/:spotId/images', requireAuth, async (req, res) =>{
+    let currentUserId = req.user.id;
     const spot = await Spots.findByPk(req.params.spotId);
-    if (spot.ownerId !== req.user.id) {
+
+    if (!spot) {
         return res.status(404).json({ message: "Spot couldn't be found"} )
+    }
+
+    if(spot.ownerId !== currentUserId){
+        return res.status(403).json({'message': "Forbidden"})
     }
 
     const { url, preview } = req.body;
@@ -247,11 +289,16 @@ router.get('/:spotId', async (req, res) => {
 //Edit a spot
 router.put('/:spotId', requireAuth, validateSpot, async (req, res)=> {
     const spotId = req.params.spotId;
+    const userId = req.user.id
 
     const spot = await Spots.findByPk(spotId);
 
     if (!spot){
         return res.status(404).json({message: "Spot couldn't be found"});
+    }
+
+    if(spot.ownerId !== userId){
+        return res.status(403).json({ message: "You are not authorized."});
     }
 
     await spot.update(req.body);
