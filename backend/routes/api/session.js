@@ -44,6 +44,8 @@ router.post(
     }
 
     const safeUser = {
+      firstName: user.firstName,
+      lastName: user.lastName,
       id: user.id,
       email: user.email,
       username: user.username,
@@ -54,6 +56,16 @@ router.post(
     return res.json({
       user: safeUser
     });
+  }
+);
+
+
+// Log out
+router.delete(
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
   }
 );
 

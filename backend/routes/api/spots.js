@@ -50,7 +50,6 @@ router.get('/', async (req, res) => {
         where: whereConditions,
         include: {
             model: SpotImage,
-            where: { preview: true },
             required: false
         },
         limit: limit,
@@ -76,9 +75,10 @@ router.get('/', async (req, res) => {
         } else {
             spot.avgRating = "No ratings yet";
         }
+        const previewImageObject = spot.SpotImages.find(img => img.preview === true);
 
-        if (spot.PreviewImage) {
-            spot.previewImage = spot.PreviewImage.url;
+        if (previewImageObject) {
+            spot.previewImage = previewImageObject.url;
         } else {
             spot.previewImage = null;
         }
@@ -119,7 +119,7 @@ router.post('/', requireAuth, validateSpot, async(req, res) => {
 //ADD IMAGE TO SPOT BASED ON SPOT ID
 router.post('/:spotId/images', requireAuth, async (req, res) =>{
     const spot = await Spots.findByPk(req.params.spotId);
-    if (spot. ownerId !== req.user.id) {
+    if (spot.ownerId !== req.user.id) {
         return res.status(404).json({ message: "Spot couldn't be found"} )
     }
 
@@ -165,12 +165,14 @@ router.get('/current', requireAuth, async (req, res) => {
                 spot.avgRating = "No ratings yet";
             }
 
-            if (spot.PreviewImage) {
-                spot.previewImage = spot.PreviewImage.url;
+            const previewImageObject = spot.SpotImages.find(img => img.preview === true);
+
+            if (previewImageObject) {
+                spot.previewImage = previewImageObject.url;
             } else {
                 spot.previewImage = null;
             }
-            delete spot.SpotImages
+            delete spot.SpotImages;
         }
 
         res.json({ Spots: spotsData });
@@ -200,17 +202,17 @@ router.get('/:spotId', async (req, res) => {
         lastName = spot.User.lastName;
     }
 
-    const reviewsCount = await Review.count({
+    const numReviews = await Review.count({
         where: { spotId: spot.id }
     });
 
     let avgStarRating;
 
-    if (reviewsCount > 0) {
+    if (numReviews > 0) {
         const totalStars = await Review.sum('stars', {
             where: { spotId: spot.id }
         });
-        avgStarRating = (totalStars / reviewsCount).toFixed(1);
+        avgStarRating = (totalStars / numReviews).toFixed(1);
     } else {
         avgStarRating = "No ratings yet";
     }
@@ -229,7 +231,7 @@ router.get('/:spotId', async (req, res) => {
         price: spot.price,
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
-        reviewsCount,
+        numReviews,
         avgStarRating,
         SpotImages: spot.SpotImages.map(image => ({ id: image.id, url: image.url, preview: image.preview })),
         Owner: {
@@ -245,7 +247,6 @@ router.get('/:spotId', async (req, res) => {
 //Edit a spot
 router.put('/:spotId', requireAuth, validateSpot, async (req, res)=> {
     const spotId = req.params.spotId;
-    const userId = req.user.id;
 
     const spot = await Spots.findByPk(spotId);
 
@@ -420,5 +421,36 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     res.json(createdBooking);
 });
+
+//Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spotId = req.params.spotId;
+    const userId = req.user.id;
+
+        const spot = await Spots.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+
+        if (spot.ownerId === userId) {
+            const bookings = await Booking.findAll({
+                where: { spotId },
+                include: {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            });
+
+            return res.status(200).json({ Bookings: bookings });
+        } else {
+            const bookings = await Booking.findAll({
+                where: { spotId },
+                attributes: ['spotId', 'startDate', 'endDate']
+            });
+            res.json({ Bookings: bookings });
+        }
+});
+
+
 
 module.exports = router;
