@@ -20,7 +20,7 @@ module.exports = {
       {
         spotId: 2,
         url: "https://example.com/image2.jpg",
-        preview: false,
+        preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
