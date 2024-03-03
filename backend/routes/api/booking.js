@@ -61,12 +61,19 @@ router.get('/current', requireAuth, async (req, res) => {
         const newStartDate = new Date(startDate);
         const newEndDate = new Date(endDate);
 
-        if (newStartDate < today) {
-            return res.status(400).json({ message: 'startDate cannot be in the past' });
-        }
+        if (newStartDate < today || newEndDate <= newStartDate) {
+            let errors = {};
+            if (newStartDate < today) {
+                errors.startDate = "startDate cannot be in the past";
+            }
+            if (newEndDate <= newStartDate) {
+                errors.endDate = "endDate cannot be on or before startDate";
+            }
 
-        if (newEndDate <= newStartDate) {
-            return res.status(400).json({ message: 'endDate cannot be on or before startDate' });
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: errors
+            });
         }
 
         const existingBookings = await Booking.findAll({
