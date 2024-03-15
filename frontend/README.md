@@ -4,6 +4,7 @@ This repo contains a basic Vite React template configured for use in App Academy
 projects.
 
 ## How to clone
+i need to change this
 
 To clone this repo as `<new-project-name>`, run
 
