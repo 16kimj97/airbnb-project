@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -45,9 +43,5 @@ function Navigation({ isLoaded }) {
     </nav>
   );
 }
-
-Navigation.propTypes = {
-  isLoaded: PropTypes.bool.isRequired,
-};
 
 export default Navigation;

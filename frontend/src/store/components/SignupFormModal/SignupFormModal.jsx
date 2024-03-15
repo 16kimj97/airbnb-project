@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../../store/session';
 import { useModal } from '../../../context/Modal';
 import './SignupForm.css';
-import React from 'react'
 
 function SignupFormModal() {
   const dispatch = useDispatch();

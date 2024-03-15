@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FaCarrot } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
