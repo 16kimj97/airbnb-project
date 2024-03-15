@@ -1,9 +1,12 @@
+import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalButton from '../components/OpenModelButton/OpenModelButton';
 import LoginFormModal from '../components/LoginFormModal/LoginFormModel';
+import SignupFormModal from '../components/SignupFormModal/SignupFormModal';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -18,17 +21,21 @@ function Navigation({ isLoaded }) {
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
-          className="navbar-link" // Added className
+          className="navbar-link"
         />
       </li>
       <li>
-        <NavLink to="/signup" className="navbar-link">Sign Up</NavLink>
+        <OpenModalButton
+          buttonText="Sign Up"
+          modalComponent={<SignupFormModal />}
+          className="navbar-link"
+        />
       </li>
     </>
   );
 
   return (
-    <nav className="navbar"> {/* Added navbar class */}
+    <nav className="navbar">
       <ul>
         <li>
           <NavLink to="/" className="navbar-link">Home</NavLink>
@@ -38,5 +45,9 @@ function Navigation({ isLoaded }) {
     </nav>
   );
 }
+
+Navigation.propTypes = {
+  isLoaded: PropTypes.bool.isRequired,
+};
 
 export default Navigation;

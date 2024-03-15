@@ -7,17 +7,20 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended"
     ],
-    overrides: [
+    "overrides": [
         {
-          files: [
-            "src/context/*.jsx"
-          ],
-          rules: {
-            'react-refresh/only-export-components': 'off'
-          }
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
         }
-       ],
-           "parserOptions": {
+    ],
+    "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },

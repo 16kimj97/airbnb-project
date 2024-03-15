@@ -1,10 +1,12 @@
 import { useModal } from '../../../context/Modal';
+import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 
 function OpenModalButton({
-  modalComponent, // component to render inside the modal
-  buttonText, // text of the button that opens the modal
-  onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
-  onModalClose // optional: callback function that will be called once the modal is closed
+  modalComponent,
+  buttonText,
+  onButtonClick,
+  onModalClose
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
@@ -16,5 +18,13 @@ function OpenModalButton({
 
   return <button onClick={onClick}>{buttonText}</button>;
 }
+
+// Define prop types
+OpenModalButton.propTypes = {
+  modalComponent: PropTypes.node.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  onButtonClick: PropTypes.func,
+  onModalClose: PropTypes.func
+};
 
 export default OpenModalButton;
