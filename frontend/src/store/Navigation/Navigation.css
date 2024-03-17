@@ -1,25 +1,23 @@
-
 .navbar {
-    background-color: #333;
-    padding: 10px 20px;
-  }
+  background-color: #333;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
 
-  .navbar ul li {
-    display: inline;
-    margin-right: 20px;
-  }
+.navbar-right {
+  display: flex;
+  gap: 25px;
+}
 
-  .navbar ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .navbar ul li a:hover {
-    text-decoration: underline;
-  }
+.icon {
+  color: #fff;
+  font-size: 25px;
+  color: orange;
+}
