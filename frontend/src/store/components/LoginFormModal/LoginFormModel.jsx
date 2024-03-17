@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import './LoginForm.css';
 
-
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
@@ -24,6 +23,21 @@ function LoginFormModal() {
         }
       });
   };
+
+  const handleDemoLogin = () => {
+    const demoCredentials = { credential: 'Demo-lition', password: 'password' };
+    setErrors({});
+    dispatch(sessionActions.login(demoCredentials))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
+  };
+
+  const isDisabled = credential.length < 4 || password.length < 6;
 
   return (
     <div className="login-form-container">
@@ -50,11 +64,11 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && <p className="login-form-error">{errors.credential}</p>}
-        <button type="submit" className="login-form-submit">Log In</button>
+        <button type="submit" className="login-form-submit" disabled={isDisabled}>Log In</button>
+        <button type="button" className="login-form-submit" onClick={handleDemoLogin}>Log in as Demo User</button>
       </form>
     </div>
   );
 }
-
 
 export default LoginFormModal;

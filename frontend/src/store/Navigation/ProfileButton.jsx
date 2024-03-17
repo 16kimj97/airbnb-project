@@ -1,33 +1,13 @@
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { FaCarrot } from 'react-icons/fa';
-import * as sessionActions from '../../store/session';
+import './ProfileButton.css';
 
 function ProfileButton() {
-  const dispatch = useDispatch();
-
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
-
-  const buttonStyle = {
-    marginRight: '10px',
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-  };
-
-  const iconStyle = {
-    color: 'orange',
-    fontSize: '25px',
-  };
-
   return (
-    <>
-      <button style={buttonStyle} onClick={logout}>
-        <FaCarrot style={iconStyle} />
-      </button>
-    </>
+    <NavLink to="/" className="profile-button-link">
+      <FaCarrot className="profile-button-icon" />
+    </NavLink>
   );
 }
 

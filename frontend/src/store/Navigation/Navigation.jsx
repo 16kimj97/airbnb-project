@@ -6,8 +6,6 @@ import './Navigation.css';
 import OpenModalButton from '../components/OpenModelButton/OpenModelButton';
 import LoginFormModal from '../components/LoginFormModal/LoginFormModel';
 import SignupFormModal from '../components/SignupFormModal/SignupFormModal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCarrot } from '@fortawesome/free-solid-svg-icons';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -15,9 +13,7 @@ function Navigation({ isLoaded }) {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <NavLink to="/" className="navbar-link">
-          <FontAwesomeIcon icon={faCarrot} className="icon" />
-        </NavLink>
+        <ProfileButton user={sessionUser}/>
       </div>
       <div className="navbar-right">
         {isLoaded && !sessionUser ? (
@@ -33,9 +29,7 @@ function Navigation({ isLoaded }) {
               className="navbar-link signup-button"
             />
           </>
-        ) : (
-          <ProfileButton user={sessionUser} />
-        )}
+        ) : null}
       </div>
     </nav>
   );

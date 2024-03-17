@@ -1,0 +1,12 @@
+.profile-button-link {
+    margin-right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none; /* Prevents underline style on links */
+  }
+
+  .profile-button-icon {
+    color: orange;
+    font-size: 25px;
+  }
