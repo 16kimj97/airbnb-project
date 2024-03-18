@@ -94,8 +94,6 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
-
-
       ],
       { validate: true }
     );
@@ -108,7 +106,16 @@ module.exports = {
     return queryInterface.bulkDelete(
       'Spots',
       {
-        address: { [Op.in]: ["123 Main St", "456 Elm St", "789 Oak St"] },
+        address: {
+          [Op.in]: [
+            "123 Main St",
+            "456 Elm St",
+            "789 Oak St",
+            "544 Summoners Rift",
+            "242 Tactics Lane",
+            "895 Dust Road"
+          ]
+        },
       },
       {}
     );
