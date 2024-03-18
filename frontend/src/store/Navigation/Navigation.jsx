@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import OpenModalButton from '../components/OpenModelButton/OpenModelButton';
-import LoginFormModal from '../components/LoginFormModal/LoginFormModel';
-import SignupFormModal from '../components/SignupFormModal/SignupFormModal';
-import DropdownMenu from '../Navigation/DropDownMenu/DropDownMenu';
+import OpenModalButton from '../OpenModelButton/OpenModelButton';
+import LoginFormModal from '../LoginFormModal/LoginFormModel';
+import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import DropdownMenu from './DropDownMenu/DropDownMenu';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);

@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
 import './DropDownMenu.css';
-import OpenModalButton from '../../components/OpenModelButton/OpenModelButton';
-import LoginFormModal from '../../components/LoginFormModal/LoginFormModel';
-import SignupFormModal from '../../components/SignupFormModal/SignupFormModal';
-import { logout } from '../../session';
+import OpenModalButton from '../../OpenModelButton/OpenModelButton';
+import LoginFormModal from '../../LoginFormModal/LoginFormModel';
+import SignupFormModal from '../../SignupFormModal/SignupFormModal';
+import { logout } from '../../../session';
 
 function DropDownMenu({ user, isOpen, toggleDropdown }) {
   const dispatch = useDispatch();
