@@ -1,0 +1,18 @@
+.profile-dropdown {
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.profile-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc; /* Add a border between items */
+}
+
+.profile-dropdown li:last-child {
+  border-bottom: none; /* Remove border from last item */
+}

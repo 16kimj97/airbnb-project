@@ -1,7 +1,6 @@
 .login-form-container {
     max-width: 400px;
     padding: 55px;
-    border: 1px solid #ccc;
     background-color: #f9f9f9;
   }
 
@@ -20,7 +19,6 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
   }
 
   .login-form-error {
@@ -33,15 +31,33 @@
     padding: 10px;
     background-color: #007bff;
     color: #fff;
-    border-radius: 5px;
     cursor: pointer;
   }
 
   .login-form-submit:hover {
-    background-color: #0056b3;
+    background-color: blue;
   }
 
   .login-form-submit:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+
+  .demo-login-form-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px; /* Add some margin from the other button */
+  }
+
+  .demo-login-form-submit:hover {
+    background-color: blue;
+  }
+
+  .demo-login-form-submit:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
   }
