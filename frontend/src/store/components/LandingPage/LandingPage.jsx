@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSpots } from '../../spots';
 import SpotTile from './SpotTile';
-import "./LandingPage.css";
+// import "./LandingPage.css";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
