@@ -29,12 +29,6 @@ function LoginFormModal() {
     setErrors({});
     dispatch(sessionActions.login(demoCredentials))
       .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
   };
 
   const isDisabled = credential.length < 4 || password.length < 6;
