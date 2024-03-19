@@ -1,47 +1,43 @@
 import { csrfFetch } from "./csrf";
 
 // Action Types
-const FETCH_SPOTS_SUCCESS = "FETCH_SPOTS_SUCCESS";
+const FETCH_SPOTS = 'spots/FETCH_SPOTS';
 
-// Action Creators
-export const fetchSpotsSuccess = (spots) => ({
-  type: FETCH_SPOTS_SUCCESS,
-  payload: spots
+// Action Creator
+const fetchSpotsSuccess = (spots) => ({
+    type: FETCH_SPOTS,
+    payload: spots
 });
 
-// Thunk Actions
+// Thunk Action
 export const fetchSpots = () => async (dispatch) => {
-  try {
-    const response = await csrfFetch("/api/spots");
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch spots");
+    try {
+        const response = await fetch("/api/spots");
+        if (response.ok) {
+            const data = await response.json();
+            dispatch(fetchSpotsSuccess(data));
+        } else {
+            throw new Error("Failed to fetch all spots");
+        }
+    } catch (error) {
+        console.error("Error fetching all spots:", error);
     }
-
-    const data = await response.json();
-    dispatch(fetchSpotsSuccess(data));
-  } catch (error) {
-    console.error("Failed to fetch spots:", error);
-  }
-};
-
-// Initial State
-const initialState = {
-  allSpots: [],
-  currentSpot: null
 };
 
 // Reducer
+const initialState = {};
+
 function spotReducer(state = initialState, action) {
-  switch (action.type) {
-    case FETCH_SPOTS_SUCCESS:
-      return {
-        ...state,
-        allSpots: action.payload
-      };
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case FETCH_SPOTS:
+            const newState = {};
+            action.payload.Spots.forEach(spot => {
+                newState[spot.id] = spot;
+            });
+            return newState;
+        default:
+            return state;
+    }
 }
 
 export default spotReducer;

@@ -4,20 +4,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
+  gap: -100px;
 }
 
 .navbar-right {
   display: flex;
-  gap: 25px;
+  margin-right: 20px
 }
 
 .icon {
   color: #fff;
   font-size: 25px;
   color: orange;
+  margin-left: 20px;
 }

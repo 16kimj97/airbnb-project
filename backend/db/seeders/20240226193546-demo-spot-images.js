@@ -12,21 +12,21 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId: 1,
-        url: "https://example.com/image1.jpg",
+        url: "https://i.postimg.cc/65dQr5hm/wano.png",
         preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         spotId: 2,
-        url: "https://example.com/image2.jpg",
+        url: "https://i.postimg.cc/gj36LyJM/Dress-Rosa.jpg",
         preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         spotId: 3,
-        url: "https://example.com/image3.jpg",
+        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
         preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -42,9 +42,9 @@ module.exports = {
       {
         url: {
           [Op.in]: [
-            "https://example.com/image1.jpg",
-            "https://example.com/image2.jpg",
-            "https://example.com/image3.jpg",
+            "https://i.postimg.cc/65dQr5hm/wano.png",
+            "https://i.postimg.cc/gj36LyJM/Dress-Rosa.jpg",
+            "https://i.postimg.cc/90zCvc3y/water-7.jpg",
           ]
         }
       },

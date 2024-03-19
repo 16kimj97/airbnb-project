@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+
+
+/* Responsive Grid */
+.spots-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(300px, 1fr));
+  grid-gap: 50px;
+}
+
+@media (max-width: 1200px) {
+  .spots-list {
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .spots-list {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+}
+
+.spot-title {
+    font-family: 'Fredericka the Great', cursive;
+    margin-left: 6px;
+    font-size: 40px;
+    font-weight: bold;
+    /* other styles */
+  }
+
+/* Spot Tile Styles */
+.landing-page .spot-tile {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Tooltip Styles */
+.tooltip {
+  position: relative;
+  text-align: center;
+  background-color: white;
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 3;
+  margin-bottom: 5px;
+  width: 50%;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Spot Image Styles */
+.spot-image {
+  height: 300px;
+  width: 375px;
+  border-radius: 20px;
+  box-shadow: 0 0 75px rgba(61, 13, 184, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.spot-name {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.spot-link {
+  text-decoration: none;
+  color: black;
+}
+
+/* Spot Info Styles */
+.spot-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Spot Rating Styles */
+.spot-rating {
+  display: flex;
+  align-items: center;
+  margin-right: 70px;
+  font-weight: bold;
+  font-size: 30;
+}
+
+.spot-rating .fa-star {
+    margin-right: 5px;
+    margin-bottom: 2px;
+  }

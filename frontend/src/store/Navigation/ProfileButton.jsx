@@ -1,12 +1,11 @@
-// import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaCarrot } from 'react-icons/fa';
+import { FaShip } from 'react-icons/fa';
 import './ProfileButton.css';
 
 function ProfileButton() {
   return (
     <NavLink to="/" className="profile-button-link">
-      <FaCarrot className="profile-button-icon" />
+      <FaShip className="profile-button-icon" />
     </NavLink>
   );
 }

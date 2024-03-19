@@ -1,18 +1,26 @@
 .profile-dropdown {
-  top: 100%;
+  position: absolute;
   display: flex;
+  right: 0;
+  top: 3.8%; /* Push the dropdown below the toggle button */
   flex-direction: column;
   background-color: white;
   border: 1px solid #ccc;
   padding: 10px;
+  list-style-type: none;
+  z-index: 1000;
+  width: 5%;
+  margin-right:  10px;
 }
+
 
 .profile-dropdown li {
   padding: 10px;
   cursor: pointer;
-  border-bottom: 1px solid #ccc; /* Add a border between items */
+  border-bottom: 1px solid #ccc;
+  border-bottom: none;
 }
 
-.profile-dropdown li:last-child {
-  border-bottom: none; /* Remove border from last item */
+.dropdown-toggle {
+  font-size: 20px;
 }
