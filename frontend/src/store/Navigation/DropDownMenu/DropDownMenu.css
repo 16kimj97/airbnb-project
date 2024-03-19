@@ -2,9 +2,9 @@
   position: absolute;
   display: flex;
   right: 0;
-  top: 3.8%; /* Push the dropdown below the toggle button */
+  top: 3.8%;
   flex-direction: column;
-  background-color: white;
+  background-color: rgb(241, 224, 224);
   border: 1px solid #ccc;
   padding: 10px;
   list-style-type: none;
