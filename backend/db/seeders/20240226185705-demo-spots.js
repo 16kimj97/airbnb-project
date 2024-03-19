@@ -74,7 +74,7 @@ module.exports = {
           country: "Chess",
           lat: 34.0522,
           lng: -118.2437,
-          name: "Airport suite near downtown",
+          name: "Airport suite",
           description: "Charming apartment near airport",
           price: 60.00,
           createdAt: new Date(),

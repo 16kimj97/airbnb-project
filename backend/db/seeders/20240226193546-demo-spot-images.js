@@ -31,6 +31,27 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        spotId: 4,
+        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 5,
+        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 6,
+        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], { validate: true });
   },
 
