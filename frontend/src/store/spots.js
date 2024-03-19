@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf";
-
 // Action Types
 const FETCH_SPOTS = 'spots/FETCH_SPOTS';
 
@@ -28,16 +26,17 @@ export const fetchSpots = () => async (dispatch) => {
 const initialState = {};
 
 function spotReducer(state = initialState, action) {
-    switch (action.type) {
-        case FETCH_SPOTS:
-            const newState = {};
-            action.payload.Spots.forEach(spot => {
-                newState[spot.id] = spot;
-            });
-            return newState;
-        default:
-            return state;
-    }
+  switch (action.type) {
+      case FETCH_SPOTS: {
+          const newState = {};
+          action.payload.Spots.forEach(spot => {
+              newState[spot.id] = spot;
+          });
+          return newState;
+      }
+      default:
+          return state;
+  }
 }
 
 export default spotReducer;
