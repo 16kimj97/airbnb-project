@@ -16,20 +16,18 @@
 }
 
 .booking-info {
-    border: 1px solid #ddd;
+    border: 2px solid black;
     position: relative;
     width: 350px;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     font-family: 'Fredericka the Great', cursive;
-    font-weight: bold;
     margin-right: 100px;
     margin-top: -10px;
+    border-radius: 20px;
   }
 
 /* Rating and Price Styles */

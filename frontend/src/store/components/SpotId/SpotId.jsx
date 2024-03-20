@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSpotById } from '../../spots';
 import './SpotId.css'
+import GetReviews from '../Reviews/Reviews';
 
 function LocationDetails({ details }) {
   return (
@@ -17,14 +18,13 @@ function SpotOverview() {
   const dispatch = useDispatch();
 
   const spotDetail = useSelector((state) => state.spots.spot);
-  console.log(`Spot details:`, spotDetail);
 
   useEffect(() => {
     dispatch(fetchSpotById(spotId));
   }, [dispatch, spotId]);
 
   const calculatedRating = parseFloat(spotDetail?.avgStarRating);
-  console.log(spotDetail);
+  // console.log(spotDetail);
 
   return spotDetail ? (
     <div className="spot-overview-container">
@@ -78,6 +78,7 @@ function SpotOverview() {
           </button>
         </div>
       </div>
+      <GetReviews spot={spotDetail} />
     </div>
   ) : (
     <div>Loading spot details...</div>
