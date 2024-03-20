@@ -5,16 +5,15 @@ import './Reviews.css'
 
 const GetSpotReviews = ({ spot }) => {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.session);
     const reviews = useSelector(state => {return state.reviewState})
 
     useEffect(() => {
         if (spot && spot.id) {
             dispatch(getAllReviews(spot.id));
         }
-    }, [dispatch, spot?.id]);
+    }, [dispatch, spot]);
 
-    let rating = parseFloat(spot?.avgStarRating).toFixed(1);
+        let rating = parseFloat(spot?.avgStarRating).toFixed(1);
     rating = isNaN(rating) ? "New" : rating;
 
     let reviewsArray = reviews ? Object.values(reviews) : [];
