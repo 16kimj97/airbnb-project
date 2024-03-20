@@ -22,8 +22,7 @@ const SpotTile = ({ spot }) => {
           <p className="spot-location">{`${spot.city}, ${spot.state}`}</p>
           <p className="spot-rating">
             <i className="fas fa-star"></i>
-            <FontAwesomeIcon icon={faStar} />
-            {displayRating}
+            {isNaN(displayRating) ? "New" : displayRating}
           </p>
         </div>
 
