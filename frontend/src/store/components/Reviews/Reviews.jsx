@@ -5,7 +5,7 @@ import './Reviews.css'
 
 const GetSpotReviews = ({ spot }) => {
     const dispatch = useDispatch();
-    const reviews = useSelector(state => {return state.reviewState})
+    const reviews = useSelector(state => {return state.reviews})
 
     useEffect(() => {
         if (spot && spot.id) {

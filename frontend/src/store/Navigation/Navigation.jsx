@@ -6,6 +6,7 @@ import OpenModalButton from '../components/OpenModelButton/OpenModelButton';
 import LoginFormModal from '../components/LoginFormModal/LoginFormModel';
 import SignupFormModal from '../components/SignupFormModal/SignupFormModal';
 import DropdownMenu from '../Navigation/DropDownMenu/DropDownMenu';
+import CreateForm from '../components/CreateSpot/CreateForm'; // Adjust the path accordingly
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -21,6 +22,7 @@ function Navigation({ isLoaded }) {
         <ProfileButton user={sessionUser} />
       </div>
       <div className="navbar-right">
+        <CreateForm />
         <DropdownMenu user={sessionUser} isOpen={isDropdownOpen} toggleDropdown={toggleDropdown}>
           {isLoaded && !sessionUser && (
             <>

@@ -7,7 +7,29 @@
   gap: -100px;
 }
 
+.navbar-left {
+  display: flex;
+  gap: 20px; /* Adjust the gap as needed */
+}
+
+.navbar-left a,
+.navbar-right a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.navbar-left a:hover,
+.navbar-right a:hover {
+  background-color: #555;
+}
+
 .navbar-right {
   display: flex;
-  margin-right: 20px
+  margin-right: 20px;
+}
+
+.navbar-link {
+  margin-right: 10px;
 }
