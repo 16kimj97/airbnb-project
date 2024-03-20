@@ -52,6 +52,38 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        spotId: 1,
+        url: "https://i.postimg.cc/65dQr5hm/wano.png",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 1,
+        url: "https://i.postimg.cc/65dQr5hm/wano.png",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }, {
+        spotId: 1,
+        url: "https://i.postimg.cc/65dQr5hm/wano.png",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }, {
+        spotId: 1,
+        url: "https://i.postimg.cc/65dQr5hm/wano.png",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }, {
+        spotId: 1,
+        url: "https://i.postimg.cc/65dQr5hm/wano.png",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], { validate: true });
   },
 
