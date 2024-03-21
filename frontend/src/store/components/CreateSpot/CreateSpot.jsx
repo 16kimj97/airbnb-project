@@ -92,134 +92,132 @@ const CreateSpot = () => {
       };
 
       return (
-
         <div className="create-spot">
-        <h2>Create a New Spot</h2>
-        <form className="create-spot-form" onSubmit={handleSubmit}>
-          <div className="section">
-            <h3>Where's your place located?</h3>
-            <p>Guests will only get your exact address once they booked a reservation.</p>
-            <label htmlFor="country">Country:</label>
-            <input type="text" id="country" name="country" value={formData.country} onChange={handleChange} />
-            {errors.country && <p className="error-message">{errors.country}</p>}
-            <label htmlFor="address">Street Address:</label>
-            <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
-            {errors.address && <p className="error-message">{errors.address}</p>}
-            <label htmlFor="city">City:</label>
-            <input type="text" id="city" name="city" value={formData.city} onChange={handleChange} />
-            {errors.city && <p className="error-message">{errors.city}</p>}
-            <label htmlFor="state">State:</label>
-            <input type="text" id="state" name="state" value={formData.state} onChange={handleChange} />
-            {errors.state && <p className="error-message">{errors.state}</p>}
-            <label htmlFor="lat">Latitude:</label>
-            <input type="text" id="lat" name="lat" value={formData.lat} onChange={handleChange} />
-            {errors.lat && <p className="error-message">{errors.lat}</p>}
-            <label htmlFor="lng">Longitude:</label>
-            <input type="text" id="lng" name="lng" value={formData.lng} onChange={handleChange} />
-            {errors.lng && <p className="error-message">{errors.lng}</p>}
-          </div>
-
-
-          <div className="section">
-            <h3>Describe your place to guests</h3>
-            <p>Mention the best features of your space, any special amenities like fast WiFi or parking, and what you love about the neighborhood.</p>
-            <div className="create-form">
-              <label htmlFor="description">Description:</label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Please write at least 30 characters"
-              ></textarea>
-              {errors.description && <p className="error-message">{errors.description}</p>}
+          <h2>Create a New Spot</h2>
+          <form className="create-spot-form" onSubmit={handleSubmit}>
+            <div className="section">
+              <h3>Where&apos;s your place located?</h3>
+              <p>Guests will only get your exact address once they booked a reservation.</p>
+              <label htmlFor="country">Country:</label>
+              <input type="text" id="country" name="country" value={formData.country} onChange={handleChange} />
+              {errors.country && <p className="error-message">{errors.country}</p>}
+              <label htmlFor="address">Street Address:</label>
+              <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
+              {errors.address && <p className="error-message">{errors.address}</p>}
+              <label htmlFor="city">City:</label>
+              <input type="text" id="city" name="city" value={formData.city} onChange={handleChange} />
+              {errors.city && <p className="error-message">{errors.city}</p>}
+              <label htmlFor="state">State:</label>
+              <input type="text" id="state" name="state" value={formData.state} onChange={handleChange} />
+              {errors.state && <p className="error-message">{errors.state}</p>}
+              <label htmlFor="lat">Latitude:</label>
+              <input type="text" id="lat" name="lat" value={formData.lat} onChange={handleChange} />
+              {errors.lat && <p className="error-message">{errors.lat}</p>}
+              <label htmlFor="lng">Longitude:</label>
+              <input type="text" id="lng" name="lng" value={formData.lng} onChange={handleChange} />
+              {errors.lng && <p className="error-message">{errors.lng}</p>}
             </div>
-          </div>
 
-          <div className="section">
-            <h3>Create a title for your spot</h3>
-            <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
-            <div className="create-form">
-              <label htmlFor="name">Spot Title:</label>
+            <div className="section">
+              <h3>Describe your place to guests</h3>
+              <p>Mention the best features of your space, any special amenities like fast WiFi or parking, and what you love about the neighborhood.</p>
+              <div className="create-form">
+                <label htmlFor="description">Description:</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Please write at least 30 characters"
+                ></textarea>
+                {errors.description && <p className="error-message">{errors.description}</p>}
+              </div>
+            </div>
+
+            <div className="section">
+              <h3>Create a title for your spot</h3>
+              <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
+              <div className="create-form">
+                <label htmlFor="name">Spot Title:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Name of your spot"
+                />
+                {errors.name && <p className="error-message">{errors.name}</p>}
+              </div>
+            </div>
+
+            <div className="section">
+              <h3>Set a base price for your spot</h3>
+              <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+              <div className="create-form">
+                <label htmlFor="price">Price per night (USD):</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  placeholder="Price per night (USD)"
+                />
+                {errors.price && <p className="error-message">{errors.price}</p>}
+              </div>
+            </div>
+
+            <div className="section">
+              <h3>Liven up your spot with photos</h3>
+              <p>Submit a link to at least one photo to publish your spot.</p>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="previewImage"
+                name="previewImage"
+                value={formData.previewImage}
                 onChange={handleChange}
-                placeholder="Name of your spot"
+                placeholder="Preview Image URL"
               />
-              {errors.name && <p className="error-message">{errors.name}</p>}
-            </div>
-          </div>
-
-          <div className="section">
-            <h3>Set a base price for your spot</h3>
-            <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
-            <div className="create-form">
-              <label htmlFor="price">Price per night (USD):</label>
+              {errors.previewImage && <p className="error-message">{errors.previewImage}</p>}
               <input
-                type="number"
-                id="price"
-                name="price"
-                value={formData.price}
+                type="text"
+                id="image2"
+                name="image2"
+                value={formData.image2}
                 onChange={handleChange}
-                placeholder="Price per night (USD)"
+                placeholder="Image URL"
               />
-              {errors.price && <p className="error-message">{errors.price}</p>}
+              <input
+                type="text"
+                id="image3"
+                name="image3"
+                value={formData.image3}
+                onChange={handleChange}
+                placeholder="Image URL"
+              />
+              <input
+                type="text"
+                id="image4"
+                name="image4"
+                value={formData.image4}
+                onChange={handleChange}
+                placeholder="Image URL"
+              />
+              <input
+                type="text"
+                id="image5"
+                name="image5"
+                value={formData.image5}
+                onChange={handleChange}
+                placeholder="Image URL"
+              />
             </div>
-          </div>
 
-        <div className="section">
-          <h3>Liven up your spot with photos</h3>
-          <p>Submit a link to at least one photo to publish your spot.</p>
-          <input
-            type="text"
-            id="previewImage"
-            name="previewImage"
-            value={formData.previewImage}
-            onChange={handleChange}
-            placeholder="Preview Image URL"
-          />
-          {errors.previewImage && <p className="error-message">{errors.previewImage}</p>}
-          <input
-            type="text"
-            id="image2"
-            name="image2"
-            value={formData.image2}
-            onChange={handleChange}
-            placeholder="Image URL"
-          />
-          <input
-            type="text"
-            id="image3"
-            name="image3"
-            value={formData.image3}
-            onChange={handleChange}
-            placeholder="Image URL"
-          />
-          <input
-            type="text"
-            id="image4"
-            name="image4"
-            value={formData.image4}
-            onChange={handleChange}
-            placeholder="Image URL"
-          />
-          <input
-            type="text"
-            id="image5"
-            name="image5"
-            value={formData.image5}
-            onChange={handleChange}
-            placeholder="Image URL"
-          />
+            <button type="submit">Create Spot</button>
+          </form>
         </div>
-
-        <button type="submit">Create Spot</button>
-      </form>
-    </div>
-  );
+      );
 };
 
-    export default CreateSpot;
+export default CreateSpot;
