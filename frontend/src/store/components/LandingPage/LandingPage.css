@@ -24,10 +24,8 @@
     margin-left: 6px;
     font-size: 40px;
     font-weight: bold;
-    /* other styles */
   }
 
-/* Spot Tile Styles */
 .landing-page .spot-tile {
   position: relative;
   max-width: 100%;
@@ -38,7 +36,6 @@
   justify-content: flex-start;
 }
 
-/* Tooltip Styles */
 .tooltip {
   position: relative;
   text-align: center;
@@ -52,7 +49,6 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-/* Spot Image Styles */
 .spot-image {
   height: 300px;
   width: 375px;
@@ -72,14 +68,12 @@
   color: black;
 }
 
-/* Spot Info Styles */
 .spot-info {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-/* Spot Rating Styles */
 .spot-rating {
   display: flex;
   align-items: center;

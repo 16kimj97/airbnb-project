@@ -62,13 +62,14 @@ export const createNewSpot = (spot) => async(dispatch) => {
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(viewSpot(data.id))
+        dispatch(createNewSpot(data.id))
 
         spot.SpotImages.map(img => {
             csrfFetch(`/api/spots/${data.id}/images`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    url: img.url
+                    url: img.url,
+                    preview: img.preview
                 })
             })
         })
@@ -89,24 +90,18 @@ function spotReducer(state = initialState, action) {
     switch (action.type) {
       case FETCH_SPOTS: {
         const spots = {};
-        action.payload.Spots.forEach(spot => {
+        action.payload.Spots.forEach((spot) => {
           spots[spot.id] = spot;
         });
         return {
           ...state,
-          spots
+          spots,
         };
       }
       case GET_SPOT_BY_ID: {
         return {
           ...state,
-          spot: action.payload
-        };
-      }
-      case CREATE_SPOT: {
-        return {
-          ...state,
-          spots: [...state.spots, action.payload]
+          spot: action.payload,
         };
       }
       default:
@@ -114,4 +109,4 @@ function spotReducer(state = initialState, action) {
     }
   }
 
-export default spotReducer;
+  export default spotReducer;

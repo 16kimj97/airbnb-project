@@ -16,15 +16,13 @@ function LocationDetails({ details }) {
 function SpotOverview() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-
   const spotDetail = useSelector((state) => state.spots.spot);
 
   useEffect(() => {
     dispatch(fetchSpotById(spotId));
   }, [dispatch, spotId]);
 
-  const calculatedRating = parseFloat(spotDetail?.avgStarRating);
-  // console.log(spotDetail);
+  const calculatedRating = spotDetail ? parseFloat(spotDetail.avgStarRating) : null;
 
   return spotDetail ? (
     <div className="spot-overview-container">
@@ -32,16 +30,16 @@ function SpotOverview() {
       <LocationDetails details={spotDetail} />
       <div className="spot-imagery-section">
         <div className="main-image-display">
-          {spotDetail.SpotImages?.length >= 1 && (
+          {spotDetail.SpotImages && spotDetail.SpotImages.length >= 1 && (
             <img
-              src={spotDetail.SpotImages.find((img) => img.preview === true).url}
+              src={spotDetail.SpotImages.find((img) => img.preview === true)?.url}
               alt={spotDetail.name}
               className="primary-spot-visual"
             />
           )}
         </div>
         <div className="gallery-thumbnails">
-          {spotDetail.SpotImages?.length > 1 && (
+          {spotDetail.SpotImages && spotDetail.SpotImages.length > 1 && (
             <ul className="thumbnail-list">
               {spotDetail.SpotImages.filter((img) => !img.preview).map((image) => (
                 <li key={image.id} className="thumbnail-item">
