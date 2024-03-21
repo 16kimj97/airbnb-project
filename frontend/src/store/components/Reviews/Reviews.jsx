@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllReviews } from '../../review';
 import './Reviews.css'
+import CreateReviewForm from '../AlterReview/CreateReview';
+import OpenModalButton from '../OpenModelButton/OpenModelButton';
 
 const GetSpotReviews = ({ spot }) => {
     const dispatch = useDispatch();
@@ -30,6 +32,12 @@ const GetSpotReviews = ({ spot }) => {
                 <div className='star-rating-review'>
                     <p>{rating} <i className="fas fa-star"></i> {reviewCountText}</p>
                 </div>
+                <div className='spot-details-review-header'>
+                <OpenModalButton
+                    modalComponent={<CreateReviewForm spot={spot} />}
+                    buttonText="Submit Review"
+                />
+            </div>
             </div>
             <div className='reviews-container'>
                 {currRevArr.map(review => (

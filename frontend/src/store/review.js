@@ -1,20 +1,13 @@
 import { csrfFetch } from "./csrf"
+import { fetchSpotById } from "./spots"
 
 const GET_REVIEWS = '/reviews/viewReviews'
-const CREATE_REVIEW = '/review/createReview'
 const DELETE_REVIEW = '/review/deleteReview'
 
 const getReviewsSucess = (reviews) => {
     return{
         type: GET_REVIEWS,
         reviews
-    }
-}
-
-const createReviewSuccess = (review) =>{
-    return{
-        type: CREATE_REVIEW,
-        review
     }
 }
 
@@ -30,27 +23,27 @@ export const getAllReviews = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`);
     if (response.ok) {
         const data = await response.json();
-        dispatch(getReviewsSucess(data.Reviews));  // Assuming data.Reviews is the array you want
+        dispatch(getReviewsSucess(data.Reviews));
     } else {
         throw new Error('Could not fetch reviews');
     }
 };
 
-export const createReview = (review, spotId) => async (dispatch) => {
+export const createReview = (reviews) => async (dispatch) => {
+    const { review, stars, spotId } = reviews;
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(review),
+        method: "POST",
+        body: JSON.stringify({
+            review,
+            stars,
+        }),
     });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(createReviewSuccess(data));
-        return data;
-    } else {
-        throw new Error('Error creating new review');
-    }
+
+    const data = await response.json();
+    dispatch(getAllReviews(spotId));
+    dispatch(fetchSpotById(spotId));
+
+    return data;
 };
 
 export const deleteReview = (reviewId) => async (dispatch) => {
@@ -76,10 +69,6 @@ function reviewReducer(state = initialState, action) {
             action.reviews.forEach(review => {
                 newState[review.id] = review;
             });
-            return newState;
-        }
-        case CREATE_REVIEW: {
-            const newState = { ...state, [action.review.id]: action.review };
             return newState;
         }
         case DELETE_REVIEW: {
