@@ -6,6 +6,7 @@ import OpenModalButton from '../../components/OpenModelButton/OpenModelButton';
 import LoginFormModal from '../../components/LoginFormModal/LoginFormModel';
 import SignupFormModal from '../../components/SignupFormModal/SignupFormModal';
 import { logout } from '../../session';
+import { Link } from 'react-router-dom';
 
 function DropDownMenu({ user, isOpen, toggleDropdown }) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function DropDownMenu({ user, isOpen, toggleDropdown }) {
 
   const closeMenu = () => {
     setShowMenu(false);
-    toggleDropdown(); // Close dropdown when clicking outside or selecting an option
+    toggleDropdown();
   };
 
   const logoutHandler = (e) => {
@@ -37,6 +38,9 @@ function DropDownMenu({ user, isOpen, toggleDropdown }) {
               <li>{user.email}</li>
               <li>
                 <button onClick={logoutHandler}>Log Out</button>
+              </li>
+              <li>
+                <Link to="/spots/current" onClick={closeMenu}>Manage Spots</Link>
               </li>
             </>
           ) : (

@@ -88,22 +88,22 @@ export const createNewSpot = (spot) => async(dispatch) => {
 }
 
 // Thunk Action to Fetch Spots by User ID
-export const getSpotByUserId = (userId) => async (dispatch) => {
+export const getSpotByUserId = () => async (dispatch) => {
     try {
-        const response = await csrfFetch(`/api/spots/user/${userId}`);
+        const response = await csrfFetch(`/api/spots/current`, {
+            method: "GET"
+        });
         if (response.ok) {
             const data = await response.json();
             dispatch(getSpotByUserIdSuccess(data));
+            return data;
         } else {
-            throw new Error(`Failed to fetch spots for user with ID: ${userId}`);
+            throw new Error(`Failed to fetch spots for the current user`);
         }
     } catch (error) {
-        console.error(`Error fetching spots for user with ID: ${userId}:`, error);
+        console.error(`Error fetching spots for the current user:`, error);
     }
 };
-
-
-
 
 // initial
 const initialState = { spot: null, spots: [] };
