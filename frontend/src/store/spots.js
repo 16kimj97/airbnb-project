@@ -3,8 +3,9 @@ import { csrfFetch } from "./csrf";
 // Action Types
 const FETCH_SPOTS = 'spots/FETCH_SPOTS';
 const GET_SPOT_BY_ID = 'spots/GET_SPOT_BY_ID';
-export const CREATE_SPOT = 'spots/CREATE_SPOT';
+const CREATE_SPOT = 'spots/CREATE_SPOT';
 const GET_SPOT_BY_USER_ID = 'spots/GET_SPOT_BY_USER_ID';
+const UPDATE_SPOT = 'spots/UPDATE_SPOTS'
 
 
 // Action Creator For Fetching Spots
@@ -29,6 +30,11 @@ const getSpotByUserIdSuccess = (spots) => ({
     type: GET_SPOT_BY_USER_ID,
     payload: spots
 });
+
+const updateSpotSuccess = (spot) => ({
+    type: UPDATE_SPOT,
+    payload: spot,
+})
 
 
 // Thunk Action fetchspots
@@ -104,6 +110,62 @@ export const getSpotByUserId = () => async (dispatch) => {
         console.error(`Error fetching spots for the current user:`, error);
     }
 };
+
+//Thunk action to update Spot
+export const fetchUpdateSpot = (spot) => async (dispatch) => {
+    const {
+      id,
+      country,
+      address,
+      city,
+      state,
+      lat,
+      lng,
+      description,
+      name,
+      price,
+      previewImage,
+      image2,
+      image3,
+      image4,
+      image5,
+    } = spot;
+
+    try {
+      const response = await csrfFetch(`/api/spots/${id}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          country,
+          address,
+          city,
+          state,
+          lat,
+          lng,
+          description,
+          name,
+          price,
+          previewImage,
+          image2,
+          image3,
+          image4,
+          image5,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update the spot.');
+      }
+
+      const updatedSpot = await response.json();
+      dispatch(updateSpotSuccess(updatedSpot));
+    } catch (error) {
+      console.error('Error updating spot:', error);
+    }
+  };
+
 
 // initial
 const initialState = { spot: null, spots: [] };
