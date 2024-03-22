@@ -55,3 +55,20 @@
 .create-review-form .submit-btn:hover {
     background-color: #0056b3;
 }
+
+.submit-btn:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.star-text {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}

@@ -4,6 +4,8 @@ import { csrfFetch } from "./csrf";
 const FETCH_SPOTS = 'spots/FETCH_SPOTS';
 const GET_SPOT_BY_ID = 'spots/GET_SPOT_BY_ID';
 export const CREATE_SPOT = 'spots/CREATE_SPOT';
+const GET_SPOT_BY_USER_ID = 'spots/GET_SPOT_BY_USER_ID';
+
 
 // Action Creator For Fetching Spots
 const fetchSpotsSuccess = (spots) => ({
@@ -22,6 +24,11 @@ export const createSpotSuccess = (spot) => {
         payload: spot,
     };
 };
+//SpotbyId Action Creator
+const getSpotByUserIdSuccess = (spots) => ({
+    type: GET_SPOT_BY_USER_ID,
+    payload: spots
+});
 
 
 // Thunk Action fetchspots
@@ -80,6 +87,22 @@ export const createNewSpot = (spot) => async(dispatch) => {
     }
 }
 
+// Thunk Action to Fetch Spots by User ID
+export const getSpotByUserId = (userId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/spots/user/${userId}`);
+        if (response.ok) {
+            const data = await response.json();
+            dispatch(getSpotByUserIdSuccess(data));
+        } else {
+            throw new Error(`Failed to fetch spots for user with ID: ${userId}`);
+        }
+    } catch (error) {
+        console.error(`Error fetching spots for user with ID: ${userId}:`, error);
+    }
+};
+
+
 
 
 // initial
@@ -104,6 +127,12 @@ function spotReducer(state = initialState, action) {
           spot: action.payload,
         };
       }
+      case GET_SPOT_BY_USER_ID: {
+        return {
+            ...state,
+            spots: action.payload,
+        };
+    }
       default:
         return state;
     }

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
 
-/* General Styles */
 .spot-overview-container {
   margin: 45px auto 0;
   font-family: 'Fredericka the Great', cursive;
@@ -22,8 +21,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    background-color: #ffffffdb;
+    box-shadow: 8px 8px 8px rgba(255, 255, 255, 0.1);
     font-family: 'Fredericka the Great', cursive;
     margin-right: 100px;
     margin-top: -10px;
@@ -38,18 +37,15 @@
   font-weight: bold;
 }
 
-/* Heading Styles */
 .spot-title {
   font-family: 'Fredericka the Great', cursive;
 }
 
-/* Positioning Styles */
 .spot-details-wrap {
   display: flex;
   justify-content: space-between;
 }
 
-/* Reserve Button Styles */
 .reservation-button {
   background-color: #e19e2b;
   color: white;
@@ -70,7 +66,6 @@
   background-color: #080601;
 }
 
-/* Large Box Styles */
 .spot-imagery-section {
   display: flex;
   flex-direction: row;
@@ -78,7 +73,6 @@
   gap: 20px;
 }
 
-/* Large Spot Image Styles */
 .primary-spot-visual {
   box-sizing: border-box;
   border-radius: 20px;
@@ -88,7 +82,6 @@
   object-fit: cover;
 }
 
-/* Image List Styles */
 .thumbnail-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -97,7 +90,6 @@
     padding: 0;
   }
 
-  /* Small Spot Image Styles */
   .thumbnail-image {
     width: 100%;
     height: auto;
@@ -107,7 +99,6 @@
     border: 2px solid rgba(0, 0, 0, 0.1);
   }
 
-/* Responsive Styles for Small Screens */
 @media (max-width: 768px) {
   .spot-imagery-section {
     flex-direction: column;

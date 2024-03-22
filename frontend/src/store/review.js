@@ -20,12 +20,18 @@ const deleteReviewSuccess = (reviewId) => {
 
 //Thunks
 export const getAllReviews = (spotId) => async (dispatch) => {
-    const response = await fetch(`/api/spots/${spotId}/reviews`);
-    if (response.ok) {
+    try {
+        const response = await fetch(`/api/spots/${spotId}/reviews`);
+        if (!response.ok) {
+            throw new Error('Could not fetch reviews');
+        }
         const data = await response.json();
-        dispatch(getReviewsSucess(data.Reviews));
-    } else {
-        throw new Error('Could not fetch reviews');
+
+        const reversedReviews = data.Reviews.reverse();
+
+        dispatch(getReviewsSucess(reversedReviews));
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
     }
 };
 
