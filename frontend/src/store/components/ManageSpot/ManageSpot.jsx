@@ -11,8 +11,6 @@ const ManageSpotPage = () => {
     const spots = useSelector((state) => Object.values(state.spots.spots));
     const navigate = useNavigate();
 
-    // console.log(spots);
-
     useEffect(() => {
         if (user) {
             dispatch(getSpotByUserId(user.id));
@@ -29,7 +27,15 @@ const ManageSpotPage = () => {
             {!isSpotEmpty() ? (
                 <div className="spot-list">
                     {flattenedSpots.map(spot => (
-                        <SpotTile key={spot.id} spot={spot} />
+                        <div key={spot.id}>
+                            <SpotTile spot={spot} />
+                            <button
+                                className="update-spot-button"
+                                onClick={() => navigate(`/spots/${spot.id}/edit`)}
+                            >
+                                Update
+                            </button>
+                        </div>
                     ))}
                 </div>
             ) : (
