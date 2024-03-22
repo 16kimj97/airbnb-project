@@ -1,0 +1,15 @@
+.spot-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+
+  /* .spot-list .fas.fa-star {
+    margin-right: 200px;
+} */
+
+
+.spot-list .spot-rating {
+    margin-right:250px;
+}

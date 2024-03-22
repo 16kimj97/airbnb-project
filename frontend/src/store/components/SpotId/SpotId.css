@@ -54,7 +54,6 @@
   border: #000000c7 2px solid;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
   text-align: center;
   display: inline-block;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -84,7 +83,7 @@
 
 .thumbnail-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     list-style: none;
     padding: 0;
