@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchUpdateSpot } from "../../spots";
 import { fetchSpotById } from "../../spots";
+import './UpdateSpot.css'
 
 const UpdateSpotForm = () => {
     const dispatch = useDispatch();
@@ -230,7 +231,7 @@ const UpdateSpotForm = () => {
               />
             </div>
 
-            <button type="submit">Update Spot</button>
+            <button type="submit" class="update-spot-button">Update Spot</button>
           </form>
         </div>
       );
