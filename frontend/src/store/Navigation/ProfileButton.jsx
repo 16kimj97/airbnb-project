@@ -5,7 +5,7 @@ import './ProfileButton.css';
 function ProfileButton() {
   return (
     <NavLink to="/" className="profile-button-link">
-      <FaShip className="profile-button-icon" />
+      <FaShip className="profile-button-icon" /> OpBnB
     </NavLink>
   );
 }

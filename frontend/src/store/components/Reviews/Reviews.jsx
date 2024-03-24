@@ -7,6 +7,18 @@ import OpenModalButton from '../OpenModelButton/OpenModelButton';
 import DeleteReviewForm from  '../AlterReview/DeleteReview'
 import { useModal } from '../../../context/Modal';
 
+const numReviewToText = numReviews => {
+    if (numReviews === 1) return '• 1 Review';
+    if (numReviews > 1) return `• ${numReviews} Reviews`;
+    return '';
+};
+
+const formatReviewDate = dateString => {
+    let date = new Date(dateString).toDateString();
+    let month = date.slice(4, 7);
+    let year = new Date(dateString).getFullYear();
+    return `${month} ${year}`;
+};
 
 const GetSpotReviews = ({ spot }) => {
     const dispatch = useDispatch();
@@ -105,17 +117,5 @@ const GetSpotReviews = ({ spot }) => {
     );
     };
 
-const numReviewToText = numReviews => {
-    if (numReviews === 1) return '• 1 Review';
-    if (numReviews > 1) return `• ${numReviews} Reviews`;
-    return '';
-};
-
-const formatReviewDate = dateString => {
-    let date = new Date(dateString).toDateString();
-    let month = date.slice(4, 7);
-    let year = new Date(dateString).getFullYear();
-    return `${month} ${year}`;
-};
 
 export default GetSpotReviews;

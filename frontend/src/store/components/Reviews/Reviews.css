@@ -1,6 +1,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 .reviews-container {
-    max-width:600px;
+    max-width: 100%;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
