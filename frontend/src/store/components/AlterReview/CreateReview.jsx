@@ -45,7 +45,7 @@ const CreateReviewForm = ({ spot }) => {
 
     return (
         <div className="create-review-form">
-        <h2>Write a Review</h2>
+        <h2>How was your stay?</h2>
         <form onSubmit={handleSubmit}>
             <div className="star-rating">
                 {[1, 2, 3, 4, 5].map((starValue) => (
@@ -63,7 +63,7 @@ const CreateReviewForm = ({ spot }) => {
                 <textarea
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
-                    placeholder="Write your review here..."
+                    placeholder="Leave your review here..."
                 ></textarea>
                 {showButton && (
                     <button
@@ -71,7 +71,7 @@ const CreateReviewForm = ({ spot }) => {
                         className={`submit-btn ${disabled ? 'hidden' : ''}`}
                         disabled={disabled}
                     >
-                        Submit Review
+                        Submit Your Review
                     </button>
                 )}
             </form>
