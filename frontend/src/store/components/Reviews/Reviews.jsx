@@ -74,6 +74,7 @@ const GetSpotReviews = ({ spot }) => {
                 {showCreateReviewButton && (
                     <div className='spot-details-review-header'>
                         <OpenModalButton
+                            className="create-review-button"
                             modalComponent={<CreateReviewForm spot={spot} />}
                             buttonText="Submit Review"
                         />
