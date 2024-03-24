@@ -74,7 +74,7 @@ module.exports = {
           country: "Grand Line",
           lat: 34.0522,
           lng: -118.2437,
-          name: "Beautiful home in the judicial capital",
+          name: "HighRise Suite",
           description: "Nearby the famous Impel Down Prison and the Infamous Navy HQ!",
           price: 60.00,
           createdAt: new Date(),
