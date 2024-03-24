@@ -26,7 +26,6 @@ const ManageSpotPage = () => {
     const isSpotEmpty = () => flattenedSpots.length === 0;
 
     const handleDeleteButtonClick = (spotId) => {
-        // Open the modal with DeleteSpotForm component
         setOnModalClose(null);
         setModalContent(
             <DeleteSpotForm

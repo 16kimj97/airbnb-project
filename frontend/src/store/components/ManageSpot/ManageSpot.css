@@ -4,12 +4,22 @@
     gap: 20px;
   }
 
+.spot-tile-rating {
+  display: flex;
+  align-items: center;
+  margin-right: 245px;
+}
 
-  /* .spot-list .fas.fa-star {
-    margin-right: 200px;
-} */
+.delete-spot-button {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 35px;
+}
 
-
-.spot-list .spot-rating {
-    margin-right:250px;
+.delete-spot-button:hover {
+  background-color: #cc0000;
 }

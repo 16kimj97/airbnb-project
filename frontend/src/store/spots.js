@@ -215,9 +215,17 @@ function spotReducer(state = initialState, action) {
             spots: action.payload,
         };
     }
-      default:
-        return state;
+    case DELETE_SPOT: {
+      const newSpots = { ...state.spots };
+      delete newSpots[action.payload];
+      return {
+        ...state,
+        spots: newSpots,
+      };
     }
+    default:
+      return state;
   }
+}
 
   export default spotReducer;
