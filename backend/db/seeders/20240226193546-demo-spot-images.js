@@ -33,21 +33,21 @@ module.exports = {
       },
       {
         spotId: 4,
-        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
+        url: "https://i.postimg.cc/fRfLK1kb/arabasta-1.jpg",
         preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         spotId: 5,
-        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
+        url: "https://i.postimg.cc/ZnWbkFpB/enies-lobby-1.jpg",
         preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         spotId: 6,
-        url: "https://i.postimg.cc/90zCvc3y/water-7.jpg",
+        url: "https://i.postimg.cc/YqFyCnNr/tumblr-3c50bfa3b9878587c922958412e09a75-bedfbfe4-1280.jpg",
         preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -130,6 +130,48 @@ module.exports = {
       {
         spotId: 3,
         url: "https://i.postimg.cc/MKk44BVn/water-5.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 4,
+        url: "https://i.postimg.cc/QVLt43pF/arabasta-2.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 4,
+        url: "https://i.postimg.cc/DytjgYHR/arabasta-3.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 4,
+        url: "https://i.postimg.cc/gkCpZsD2/arabasta-3.png",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 4,
+        url: "https://i.postimg.cc/jjbY2jhg/arabasta-4.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 5,
+        url: "https://i.postimg.cc/6qXkcrzx/enies-lobby-2.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 6,
+        url: "https://i.postimg.cc/QMZDMKKP/sky-2.jpg",
         preview: false,
         createdAt: new Date(),
         updatedAt: new Date()
