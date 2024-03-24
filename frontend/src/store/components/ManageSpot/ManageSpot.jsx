@@ -36,7 +36,7 @@ const ManageSpotPage = () => {
     };
 
     return (
-        <div>
+        <div className="manage-spot-page">
             <h1>Manage Your Spots</h1>
             {!isSpotEmpty() ? (
                 <div className="spot-list">

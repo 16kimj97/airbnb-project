@@ -4,11 +4,11 @@
     gap: 20px;
   }
 
-.spot-tile-rating {
-  display: flex;
-  align-items: center;
-  margin-right: 245px;
-}
+  .manage-spot-page .spot-tile-rating {
+    display: flex;
+    align-items: center;
+    margin-right: 245px;
+  }
 
 .delete-spot-button {
   background-color: #ff0000;
