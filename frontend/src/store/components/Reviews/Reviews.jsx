@@ -4,19 +4,34 @@ import { getAllReviews } from '../../review';
 import './Reviews.css'
 import CreateReviewForm from '../AlterReview/CreateReview';
 import OpenModalButton from '../OpenModelButton/OpenModelButton';
+import DeleteReviewForm from  '../AlterReview/DeleteReview'
+import { useModal } from '../../../context/Modal';
+
 
 const GetSpotReviews = ({ spot }) => {
     const dispatch = useDispatch();
     const reviews = useSelector(state => {return state.reviews})
     const currentUser = useSelector(state => state.session.user);
     const [showCreateReviewButton, setShowCreateReviewButton] = useState(false);
-
+    const { setModalContent, setOnModalClose } = useModal();
+    const [userCanDeleteReview, setUserCanDeleteReview] = useState(false);
 
     useEffect(() => {
         if (spot && spot.id) {
             dispatch(getAllReviews(spot.id));
         }
     }, [dispatch, spot]);
+
+
+    const handleDeleteButtonClick = (reviewId) => {
+        setOnModalClose(null);
+        setModalContent(
+            <DeleteReviewForm
+                reviewId={reviewId}
+                onModalClose={() => setModalContent(null)}
+            />
+        );
+    };
 
         let rating = parseFloat(spot.avgStarRating).toFixed(1);
     rating = isNaN(rating) ? "New" : rating;
@@ -43,8 +58,10 @@ const GetSpotReviews = ({ spot }) => {
             // console.log('userHasReviewed:', userHasReviewed);
 
             setShowCreateReviewButton(!userOwnsSpot && !userHasReviewed);
+            setUserCanDeleteReview(userHasReviewed);
         } else {
             setShowCreateReviewButton(false);
+            setUserCanDeleteReview(false);
         }
     }, [currentUser, spot, reviews, currRevArr]);
 
@@ -69,6 +86,14 @@ const GetSpotReviews = ({ spot }) => {
                         <p className='spot-details-firstName'>{review.User.firstName}</p>
                         <p className='spot-details-date'>{review.newDate}</p>
                         <p className='spot-details-review'>{review.review}</p>
+                        {userCanDeleteReview && review.userId === currentUser.id && (
+                            <button
+                                className="delete-review-button"
+                                onClick={() => handleDeleteButtonClick(review.id)}
+                            >
+                                Delete
+                            </button>
+                        )}
                     </div>
                 ))}
                 {currRevArr.length === 0 && (

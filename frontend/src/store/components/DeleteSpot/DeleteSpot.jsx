@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { deleteSpotById } from "../../spots";
+import './DeleteSpot.css'
 
 function DeleteSpotForm({ spotId, onModalClose }) {
     const dispatch = useDispatch();

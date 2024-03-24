@@ -31,11 +31,13 @@ const getSpotByUserIdSuccess = (spots) => ({
     payload: spots
 });
 
+//updateSpot Action Creator
 const updateSpotSuccess = (spot) => ({
     type: UPDATE_SPOT,
     payload: spot,
 })
 
+//deleteSpot Action Creator
 const deleteSpotSuccess = (spotId) => ({
   type: DELETE_SPOT,
   payload: spotId,
@@ -170,6 +172,7 @@ export const fetchUpdateSpot = (spot) => async (dispatch) => {
     }
   };
 
+  //Thunk Action deleteSpot
   export const deleteSpotById = (spotId) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/spots/${spotId}`, {

@@ -1,0 +1,26 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-button {
+    background-color: #ff4d4f;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #ff7875;
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #999;
+}
