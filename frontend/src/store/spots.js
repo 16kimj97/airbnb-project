@@ -6,7 +6,7 @@ const GET_SPOT_BY_ID = 'spots/GET_SPOT_BY_ID';
 const CREATE_SPOT = 'spots/CREATE_SPOT';
 const GET_SPOT_BY_USER_ID = 'spots/GET_SPOT_BY_USER_ID';
 const UPDATE_SPOT = 'spots/UPDATE_SPOTS'
-
+const DELETE_SPOT = 'spots/DELETE_SPOT'
 
 // Action Creator For Fetching Spots
 const fetchSpotsSuccess = (spots) => ({
@@ -36,6 +36,10 @@ const updateSpotSuccess = (spot) => ({
     payload: spot,
 })
 
+const deleteSpot = (spotId) => ({
+  type: DELETE_SPOT,
+  payload: spotId,
+})
 
 // Thunk Action fetchspots
 export const fetchSpots = () => async (dispatch) => {
@@ -165,6 +169,22 @@ export const fetchUpdateSpot = (spot) => async (dispatch) => {
       console.error('Error updating spot:', error);
     }
   };
+
+  export const deleteSpotById = (spotId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/spots/${spotId}`, {
+            method: "DELETE"
+        });
+        if (response.ok) {
+            dispatch(deleteSpotSuccess(spotId));
+        } else {
+            throw new Error(`Failed to delete spot with ID ${spotId}`);
+        }
+    } catch (error) {
+        console.error(`Error deleting spot with ID ${spotId}:`, error);
+    }
+};
+
 
 
 // initial

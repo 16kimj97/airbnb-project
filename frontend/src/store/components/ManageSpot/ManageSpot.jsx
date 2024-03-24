@@ -4,12 +4,16 @@ import { getSpotByUserId } from '../../spots';
 import SpotTile from '../LandingPage/SpotTile'
 import './ManageSpot.css'
 import { useNavigate } from 'react-router-dom'
+import DeleteSpotForm from "../DeleteSpot/DeleteSpot";
+import { useModal } from '../../../context/Modal';
+
 
 const ManageSpotPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const spots = useSelector((state) => Object.values(state.spots.spots));
     const navigate = useNavigate();
+    const { setModalContent, setOnModalClose } = useModal();
 
     useEffect(() => {
         if (user) {
@@ -20,6 +24,17 @@ const ManageSpotPage = () => {
     const flattenedSpots = spots.flat();
 
     const isSpotEmpty = () => flattenedSpots.length === 0;
+
+    const handleDeleteButtonClick = (spotId) => {
+        // Open the modal with DeleteSpotForm component
+        setOnModalClose(null);
+        setModalContent(
+            <DeleteSpotForm
+                spotId={spotId}
+                onModalClose={() => setModalContent(null)}
+            />
+        );
+    };
 
     return (
         <div>
@@ -34,6 +49,12 @@ const ManageSpotPage = () => {
                                 onClick={() => navigate(`/spots/${spot.id}/edit`)}
                             >
                                 Update
+                            </button>
+                            <button
+                                className="delete-spot-button"
+                                onClick={() => handleDeleteButtonClick(spot.id)}
+                            >
+                                Delete
                             </button>
                         </div>
                     ))}
