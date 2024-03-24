@@ -94,6 +94,34 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          ownerId: 1,
+          address: "895 Turtle Street",
+          city: "MokoMo DukeDom",
+          state: "Zunesha",
+          country: "Zou",
+          lat: 34.0522,
+          lng: -118.2437,
+          name: "Secret Spot",
+          description: "Island on the back of a moving elephant named Zunesha!",
+          price: 450.87,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          ownerId: 2,
+          address: "895 Foosha Lane",
+          city: "Dawn Island",
+          state: "Goa Kingdom",
+          country: "East Blue",
+          lat: 34.0522,
+          lng: -118.2437,
+          name: "Cozy windmill",
+          description: "Luffy's hometown! Come visit the home of where the King of the Pirates was born!",
+          price: 50.99,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ],
       { validate: true }
     );
