@@ -36,7 +36,7 @@ const updateSpotSuccess = (spot) => ({
     payload: spot,
 })
 
-const deleteSpot = (spotId) => ({
+const deleteSpotSuccess = (spotId) => ({
   type: DELETE_SPOT,
   payload: spotId,
 })

@@ -214,7 +214,7 @@ const CreateSpot = () => {
               />
             </div>
 
-            <button type="submit" class="create-spot-button">Create Spot</button>
+            <button type="submit" className="create-spot-button">Create Spot</button>
           </form>
         </div>
       );

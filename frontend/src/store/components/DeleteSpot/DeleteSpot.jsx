@@ -4,7 +4,7 @@ import { deleteSpotById } from "../../spots";
 function DeleteSpotForm({ spotId, onModalClose }) {
     const dispatch = useDispatch();
 
-    const handleDeleteSpot = async (e) => {
+    const handleDeleteSpot = async () => {
         try {
             await dispatch(deleteSpotById(spotId));
             if (onModalClose) {

@@ -231,7 +231,7 @@ const UpdateSpotForm = () => {
               />
             </div>
 
-            <button type="submit" class="update-spot-button">Update Spot</button>
+            <button type="submit" className="update-spot-button">Update Spot</button>
           </form>
         </div>
       );
