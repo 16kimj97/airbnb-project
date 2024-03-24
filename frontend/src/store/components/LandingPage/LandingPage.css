@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
 
-/* Responsive Grid */
 .spots-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(300px, 1fr));
@@ -13,12 +12,12 @@
   }
 }
 
-.spot-title {
-    font-family: 'Fredericka the Great', cursive;
-    margin-left: 6px;
-    font-size: 40px;
-    font-weight: bold;
-  }
+.spot-tile-title {
+  font-family: 'Fredericka the Great', cursive;
+  margin-left: 6px;
+  font-size: 40px;
+  font-weight: bold;
+}
 
 .landing-page .spot-tile {
   position: relative;
@@ -42,7 +41,7 @@
   width: 50%;
 }
 
-.spot-image {
+.spot-tile-image {
   height: 300px;
   width: 375px;
   border-radius: 20px;
@@ -56,26 +55,27 @@
   padding: 0;
 }
 
-.spot-link {
+.spot-tile-link {
   text-decoration: none;
   color: black;
 }
 
-.spot-info {
+.spot-tile-info {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.spot-rating {
+.spot-tile-rating {
   display: flex;
   align-items: center;
   margin-right: 70px;
   font-weight: bold;
-  font-size: 30;
+  font-size: 17x;
+  margin-bottom: 10px;
 }
 
-.spot-rating .fa-star {
-    margin-right: 5px;
-    margin-bottom: 2px;
-  }
+.spot-tile-rating .fa-star {
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
