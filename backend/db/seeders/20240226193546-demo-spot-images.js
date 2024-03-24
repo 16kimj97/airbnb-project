@@ -176,6 +176,41 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        spotId: 7,
+        url: "https://i.postimg.cc/xTY7rYzG/download.jpg",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 7,
+        url: "https://i.postimg.cc/NjKkSPp7/download-1.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 8,
+        url: "https://i.postimg.cc/FznDJtTz/vnONbxb.jpg",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 8,
+        url: "https://i.postimg.cc/d1CqfvyP/281945e347ded39b4f77cdc33cd98fca.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        spotId: 8,
+        url: "https://i.postimg.cc/jjwKWKvw/download-2.jpg",
+        preview: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], { validate: true });
   },
 
