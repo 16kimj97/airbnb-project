@@ -86,14 +86,6 @@ module.exports = {
         {
           spotId: 2,
           userId: 3,
-          review: "The elves in the forest were a joy!",
-          stars: 3,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          spotId: 2,
-          userId: 3,
           review: "The toys in the forest were a joy!",
           stars: 3,
           createdAt: new Date(),

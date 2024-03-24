@@ -179,14 +179,14 @@ module.exports = {
       {
         spotId: 7,
         url: "https://i.postimg.cc/xTY7rYzG/download.jpg",
-        preview: true,
+        preview: false,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         spotId: 7,
         url: "https://i.postimg.cc/NjKkSPp7/download-1.jpg",
-        preview: false,
+        preview: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
